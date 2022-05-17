@@ -8,13 +8,9 @@ You can complete each of the exercises using your [SAP BTP Trial account](https:
 
 ## Download and Installation
 
-To get started with the first exercise, simply run the following commands in your terminal:
+To get started with the first exercise, simply download the `provided_integration_content.zip` file from the release section. Please ensure to download the latest version.
 
-```sh
-git clone https://github.com/SAP-samples/integration-suite-learning-journey
-```
-
-However, we recommend to follow the instructions in the [learning journey](https://learning.sap.com/learning-journey/developing-with-sap-integration-suite/setting-up-your-environment) to get started.
+We recommend to follow the instructions in the [learning journey](https://learning.sap.com/learning-journey/developing-with-sap-integration-suite/setting-up-your-environment) to get started.
 
 
 ## Known Issues
