@@ -1,7 +1,7 @@
 # Welcome to the SAP Integration Suite Learning Journey
 [![REUSE status](https://api.reuse.software/badge/github.com/SAP-samples/integration-suite-learning-journey)](https://api.reuse.software/info/github.com/SAP-samples/integration-suite-learning-journey)
 
-Welcome to this repository for the learning journey "Developing with SAP Integration Suite" published on [SAP Learning](https://learning.sap.com/learning-journey/developing-with-sap-integration-suite). We provide a starting template for the exercises as well as a dedicated branch for each exercise with its final solution.
+Welcome to this repository for the learning journey "Developing with SAP Integration Suite" published on [SAP Learning](https://learning.sap.com/learning-journey/developing-with-sap-integration-suite). We provide a starting template for the exercises here, so that you can get started quickly.
 
 ## Requirements
 You can complete each of the exercises using your [SAP BTP Trial account](https://account.hanatrial.ondemand.com/). In a SAP Classroom training you will use the provided systems by the trainer.
