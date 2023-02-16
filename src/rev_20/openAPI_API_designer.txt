@@ -1,0 +1,5299 @@
+
+tags:
+  - name: BusinessPartnerSet
+  - name: ProductSet
+  - name: SalesOrderSet
+  - name: SalesOrderLineItemSet
+  - name: ContactSet
+  - name: VH_SexSet
+  - name: VH_CountrySet
+  - name: VH_AddressTypeSet
+  - name: VH_CategorySet
+  - name: VH_CurrencySet
+  - name: VH_UnitQuantitySet
+  - name: VH_UnitWeightSet
+  - name: VH_UnitLengthSet
+  - name: VH_ProductTypeCodeSet
+  - name: VH_BPRoleSet
+  - name: VH_LanguageSet
+paths:
+  /BusinessPartnerSet:
+    get:
+      summary: Get entities from BusinessPartnerSet
+      tags:
+        - BusinessPartnerSet
+      parameters:
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/skip'
+        - name: $filter
+          in: query
+          description: >-
+            Filter items by property values, see
+            [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)
+          schema:
+            type: string
+        - $ref: '#/components/parameters/count'
+        - name: $orderby
+          in: query
+          description: >-
+            Order items by property values, see
+            [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - Address
+                - Address desc
+                - BusinessPartnerID
+                - BusinessPartnerID desc
+                - CompanyName
+                - CompanyName desc
+                - EmailAddress
+                - EmailAddress desc
+                - PhoneNumber
+                - PhoneNumber desc
+                - FaxNumber
+                - FaxNumber desc
+                - LegalForm
+                - LegalForm desc
+                - CurrencyCode
+                - CurrencyCode desc
+                - BusinessPartnerRole
+                - BusinessPartnerRole desc
+                - CreatedAt
+                - CreatedAt desc
+                - ChangedAt
+                - ChangedAt desc
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - Address
+                - BusinessPartnerID
+                - CompanyName
+                - WebAddress
+                - EmailAddress
+                - PhoneNumber
+                - FaxNumber
+                - LegalForm
+                - CurrencyCode
+                - BusinessPartnerRole
+                - CreatedAt
+                - ChangedAt
+                - ToSalesOrders
+                - ToContacts
+                - ToProducts
+        - name: $expand
+          in: query
+          description: >-
+            Expand related entities, see
+            [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - ToSalesOrders
+                - ToContacts
+                - ToProducts
+      responses:
+        '200':
+          description: Retrieved entities
+          content:
+            application/json:
+              schema:
+                title: Wrapper
+                type: object
+                properties:
+                  d:
+                    title: Collection of BusinessPartner
+                    type: object
+                    properties:
+                      __count:
+                        $ref: '#/components/schemas/count'
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/GWSAMPLE_BASIC.BusinessPartner'
+        4XX:
+          $ref: '#/components/responses/error'
+    post:
+      summary: Add new entity to BusinessPartnerSet
+      tags:
+        - BusinessPartnerSet
+      requestBody:
+        required: true
+        description: New entity
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GWSAMPLE_BASIC.BusinessPartner-create'
+      responses:
+        '201':
+          description: Created entity
+          content:
+            application/json:
+              schema:
+                title: BusinessPartner
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/GWSAMPLE_BASIC.BusinessPartner'
+        4XX:
+          $ref: '#/components/responses/error'
+  '/BusinessPartnerSet(''{BusinessPartnerID}'')':
+    parameters:
+      - name: BusinessPartnerID
+        in: path
+        required: true
+        description: 'EPM: Business Partner ID'
+        schema:
+          type: string
+          maxLength: 10
+    get:
+      summary: Get entity from BusinessPartnerSet by key
+      tags:
+        - BusinessPartnerSet
+      parameters:
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - Address
+                - BusinessPartnerID
+                - CompanyName
+                - WebAddress
+                - EmailAddress
+                - PhoneNumber
+                - FaxNumber
+                - LegalForm
+                - CurrencyCode
+                - BusinessPartnerRole
+                - CreatedAt
+                - ChangedAt
+                - ToSalesOrders
+                - ToContacts
+                - ToProducts
+        - name: $expand
+          in: query
+          description: >-
+            Expand related entities, see
+            [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - ToSalesOrders
+                - ToContacts
+                - ToProducts
+      responses:
+        '200':
+          description: Retrieved entity
+          content:
+            application/json:
+              schema:
+                title: BusinessPartner
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/GWSAMPLE_BASIC.BusinessPartner'
+        4XX:
+          $ref: '#/components/responses/error'
+    put:
+      summary: Update entity in BusinessPartnerSet
+      tags:
+        - BusinessPartnerSet
+      requestBody:
+        required: true
+        description: New property values
+        content:
+          application/json:
+            schema:
+              title: Modified BusinessPartner
+              type: object
+              properties:
+                d:
+                  $ref: '#/components/schemas/GWSAMPLE_BASIC.BusinessPartner-update'
+      responses:
+        '204':
+          description: Success
+        4XX:
+          $ref: '#/components/responses/error'
+    delete:
+      summary: Delete entity from BusinessPartnerSet
+      tags:
+        - BusinessPartnerSet
+      responses:
+        '204':
+          description: Success
+        4XX:
+          $ref: '#/components/responses/error'
+  '/BusinessPartnerSet(''{BusinessPartnerID}'')/ToSalesOrders':
+    parameters:
+      - name: BusinessPartnerID
+        in: path
+        required: true
+        description: 'EPM: Business Partner ID'
+        schema:
+          type: string
+          maxLength: 10
+    get:
+      summary: Get entities from related ToSalesOrders
+      tags:
+        - BusinessPartnerSet
+        - SalesOrderSet
+      parameters:
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/skip'
+        - name: $filter
+          in: query
+          description: >-
+            Filter items by property values, see
+            [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)
+          schema:
+            type: string
+        - $ref: '#/components/parameters/count'
+        - name: $orderby
+          in: query
+          description: >-
+            Order items by property values, see
+            [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - SalesOrderID
+                - SalesOrderID desc
+                - CustomerID
+                - CustomerID desc
+                - CustomerName
+                - CustomerName desc
+                - CurrencyCode
+                - CurrencyCode desc
+                - GrossAmount
+                - GrossAmount desc
+                - NetAmount
+                - NetAmount desc
+                - TaxAmount
+                - TaxAmount desc
+                - LifecycleStatus
+                - LifecycleStatus desc
+                - BillingStatus
+                - BillingStatus desc
+                - DeliveryStatus
+                - DeliveryStatus desc
+                - CreatedAt
+                - CreatedAt desc
+                - ChangedAt
+                - ChangedAt desc
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - SalesOrderID
+                - Note
+                - NoteLanguage
+                - CustomerID
+                - CustomerName
+                - CurrencyCode
+                - GrossAmount
+                - NetAmount
+                - TaxAmount
+                - LifecycleStatus
+                - LifecycleStatusDescription
+                - BillingStatus
+                - BillingStatusDescription
+                - DeliveryStatus
+                - DeliveryStatusDescription
+                - CreatedAt
+                - ChangedAt
+                - ToBusinessPartner
+                - ToLineItems
+        - name: $expand
+          in: query
+          description: >-
+            Expand related entities, see
+            [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - ToBusinessPartner
+                - ToLineItems
+      responses:
+        '200':
+          description: Retrieved entities
+          content:
+            application/json:
+              schema:
+                title: Wrapper
+                type: object
+                properties:
+                  d:
+                    title: Collection of SalesOrder
+                    type: object
+                    properties:
+                      __count:
+                        $ref: '#/components/schemas/count'
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/GWSAMPLE_BASIC.SalesOrder'
+        4XX:
+          $ref: '#/components/responses/error'
+    post:
+      summary: Add new entity to related ToSalesOrders
+      tags:
+        - BusinessPartnerSet
+        - SalesOrderSet
+      requestBody:
+        required: true
+        description: New entity
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GWSAMPLE_BASIC.SalesOrder-create'
+      responses:
+        '201':
+          description: Created entity
+          content:
+            application/json:
+              schema:
+                title: SalesOrder
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/GWSAMPLE_BASIC.SalesOrder'
+        4XX:
+          $ref: '#/components/responses/error'
+  '/BusinessPartnerSet(''{BusinessPartnerID}'')/ToContacts':
+    parameters:
+      - name: BusinessPartnerID
+        in: path
+        required: true
+        description: 'EPM: Business Partner ID'
+        schema:
+          type: string
+          maxLength: 10
+    get:
+      summary: Get entities from related ToContacts
+      tags:
+        - BusinessPartnerSet
+        - ContactSet
+      parameters:
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/skip'
+        - name: $filter
+          in: query
+          description: >-
+            Filter items by property values, see
+            [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)
+          schema:
+            type: string
+        - $ref: '#/components/parameters/count'
+        - name: $orderby
+          in: query
+          description: >-
+            Order items by property values, see
+            [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - Address
+                - Address desc
+                - ContactGuid
+                - ContactGuid desc
+                - BusinessPartnerID
+                - BusinessPartnerID desc
+                - Title
+                - Title desc
+                - FirstName
+                - FirstName desc
+                - MiddleName
+                - MiddleName desc
+                - LastName
+                - LastName desc
+                - Nickname
+                - Nickname desc
+                - Initials
+                - Initials desc
+                - Sex
+                - Sex desc
+                - PhoneNumber
+                - PhoneNumber desc
+                - FaxNumber
+                - FaxNumber desc
+                - EmailAddress
+                - EmailAddress desc
+                - Language
+                - Language desc
+                - DateOfBirth
+                - DateOfBirth desc
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - Address
+                - ContactGuid
+                - BusinessPartnerID
+                - Title
+                - FirstName
+                - MiddleName
+                - LastName
+                - Nickname
+                - Initials
+                - Sex
+                - PhoneNumber
+                - FaxNumber
+                - EmailAddress
+                - Language
+                - DateOfBirth
+                - ToBusinessPartner
+        - name: $expand
+          in: query
+          description: >-
+            Expand related entities, see
+            [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - ToBusinessPartner
+      responses:
+        '200':
+          description: Retrieved entities
+          content:
+            application/json:
+              schema:
+                title: Wrapper
+                type: object
+                properties:
+                  d:
+                    title: Collection of Contact
+                    type: object
+                    properties:
+                      __count:
+                        $ref: '#/components/schemas/count'
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/GWSAMPLE_BASIC.Contact'
+        4XX:
+          $ref: '#/components/responses/error'
+    post:
+      summary: Add new entity to related ToContacts
+      tags:
+        - BusinessPartnerSet
+        - ContactSet
+      requestBody:
+        required: true
+        description: New entity
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GWSAMPLE_BASIC.Contact-create'
+      responses:
+        '201':
+          description: Created entity
+          content:
+            application/json:
+              schema:
+                title: Contact
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/GWSAMPLE_BASIC.Contact'
+        4XX:
+          $ref: '#/components/responses/error'
+  '/BusinessPartnerSet(''{BusinessPartnerID}'')/ToProducts':
+    parameters:
+      - name: BusinessPartnerID
+        in: path
+        required: true
+        description: 'EPM: Business Partner ID'
+        schema:
+          type: string
+          maxLength: 10
+    get:
+      summary: Get entities from related ToProducts
+      tags:
+        - BusinessPartnerSet
+        - ProductSet
+      parameters:
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/skip'
+        - name: $filter
+          in: query
+          description: >-
+            Filter items by property values, see
+            [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)
+          schema:
+            type: string
+        - $ref: '#/components/parameters/count'
+        - name: $orderby
+          in: query
+          description: >-
+            Order items by property values, see
+            [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - ProductID
+                - ProductID desc
+                - TypeCode
+                - TypeCode desc
+                - Category
+                - Category desc
+                - SupplierID
+                - SupplierID desc
+                - SupplierName
+                - SupplierName desc
+                - TaxTarifCode
+                - TaxTarifCode desc
+                - MeasureUnit
+                - MeasureUnit desc
+                - WeightMeasure
+                - WeightMeasure desc
+                - WeightUnit
+                - WeightUnit desc
+                - CurrencyCode
+                - CurrencyCode desc
+                - Price
+                - Price desc
+                - Width
+                - Width desc
+                - Depth
+                - Depth desc
+                - Height
+                - Height desc
+                - DimUnit
+                - DimUnit desc
+                - CreatedAt
+                - CreatedAt desc
+                - ChangedAt
+                - ChangedAt desc
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - ProductID
+                - TypeCode
+                - Category
+                - Name
+                - NameLanguage
+                - Description
+                - DescriptionLanguage
+                - SupplierID
+                - SupplierName
+                - TaxTarifCode
+                - MeasureUnit
+                - WeightMeasure
+                - WeightUnit
+                - CurrencyCode
+                - Price
+                - Width
+                - Depth
+                - Height
+                - DimUnit
+                - CreatedAt
+                - ChangedAt
+                - ToSupplier
+                - ToSalesOrderLineItems
+        - name: $expand
+          in: query
+          description: >-
+            Expand related entities, see
+            [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - ToSupplier
+                - ToSalesOrderLineItems
+      responses:
+        '200':
+          description: Retrieved entities
+          content:
+            application/json:
+              schema:
+                title: Wrapper
+                type: object
+                properties:
+                  d:
+                    title: Collection of Product
+                    type: object
+                    properties:
+                      __count:
+                        $ref: '#/components/schemas/count'
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/GWSAMPLE_BASIC.Product'
+        4XX:
+          $ref: '#/components/responses/error'
+    post:
+      summary: Add new entity to related ToProducts
+      tags:
+        - BusinessPartnerSet
+        - ProductSet
+      requestBody:
+        required: true
+        description: New entity
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GWSAMPLE_BASIC.Product-create'
+      responses:
+        '201':
+          description: Created entity
+          content:
+            application/json:
+              schema:
+                title: Product
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/GWSAMPLE_BASIC.Product'
+        4XX:
+          $ref: '#/components/responses/error'
+  /ProductSet:
+    get:
+      summary: Get entities from ProductSet
+      tags:
+        - ProductSet
+      parameters:
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/skip'
+        - name: $filter
+          in: query
+          description: >-
+            Filter items by property values, see
+            [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)
+          schema:
+            type: string
+        - $ref: '#/components/parameters/count'
+        - name: $orderby
+          in: query
+          description: >-
+            Order items by property values, see
+            [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - ProductID
+                - ProductID desc
+                - TypeCode
+                - TypeCode desc
+                - Category
+                - Category desc
+                - SupplierID
+                - SupplierID desc
+                - SupplierName
+                - SupplierName desc
+                - TaxTarifCode
+                - TaxTarifCode desc
+                - MeasureUnit
+                - MeasureUnit desc
+                - WeightMeasure
+                - WeightMeasure desc
+                - WeightUnit
+                - WeightUnit desc
+                - CurrencyCode
+                - CurrencyCode desc
+                - Price
+                - Price desc
+                - Width
+                - Width desc
+                - Depth
+                - Depth desc
+                - Height
+                - Height desc
+                - DimUnit
+                - DimUnit desc
+                - CreatedAt
+                - CreatedAt desc
+                - ChangedAt
+                - ChangedAt desc
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - ProductID
+                - TypeCode
+                - Category
+                - Name
+                - NameLanguage
+                - Description
+                - DescriptionLanguage
+                - SupplierID
+                - SupplierName
+                - TaxTarifCode
+                - MeasureUnit
+                - WeightMeasure
+                - WeightUnit
+                - CurrencyCode
+                - Price
+                - Width
+                - Depth
+                - Height
+                - DimUnit
+                - CreatedAt
+                - ChangedAt
+                - ToSupplier
+                - ToSalesOrderLineItems
+        - name: $expand
+          in: query
+          description: >-
+            Expand related entities, see
+            [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - ToSupplier
+                - ToSalesOrderLineItems
+      responses:
+        '200':
+          description: Retrieved entities
+          content:
+            application/json:
+              schema:
+                title: Wrapper
+                type: object
+                properties:
+                  d:
+                    title: Collection of Product
+                    type: object
+                    properties:
+                      __count:
+                        $ref: '#/components/schemas/count'
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/GWSAMPLE_BASIC.Product'
+        4XX:
+          $ref: '#/components/responses/error'
+    post:
+      summary: Add new entity to ProductSet
+      tags:
+        - ProductSet
+      requestBody:
+        required: true
+        description: New entity
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GWSAMPLE_BASIC.Product-create'
+      responses:
+        '201':
+          description: Created entity
+          content:
+            application/json:
+              schema:
+                title: Product
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/GWSAMPLE_BASIC.Product'
+        4XX:
+          $ref: '#/components/responses/error'
+  '/ProductSet(''{ProductID}'')':
+    parameters:
+      - name: ProductID
+        in: path
+        required: true
+        description: 'EPM: Product ID'
+        schema:
+          type: string
+          maxLength: 10
+    get:
+      summary: Get entity from ProductSet by key
+      tags:
+        - ProductSet
+      parameters:
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - ProductID
+                - TypeCode
+                - Category
+                - Name
+                - NameLanguage
+                - Description
+                - DescriptionLanguage
+                - SupplierID
+                - SupplierName
+                - TaxTarifCode
+                - MeasureUnit
+                - WeightMeasure
+                - WeightUnit
+                - CurrencyCode
+                - Price
+                - Width
+                - Depth
+                - Height
+                - DimUnit
+                - CreatedAt
+                - ChangedAt
+                - ToSupplier
+                - ToSalesOrderLineItems
+        - name: $expand
+          in: query
+          description: >-
+            Expand related entities, see
+            [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - ToSupplier
+                - ToSalesOrderLineItems
+      responses:
+        '200':
+          description: Retrieved entity
+          content:
+            application/json:
+              schema:
+                title: Product
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/GWSAMPLE_BASIC.Product'
+        4XX:
+          $ref: '#/components/responses/error'
+    put:
+      summary: Update entity in ProductSet
+      tags:
+        - ProductSet
+      requestBody:
+        required: true
+        description: New property values
+        content:
+          application/json:
+            schema:
+              title: Modified Product
+              type: object
+              properties:
+                d:
+                  $ref: '#/components/schemas/GWSAMPLE_BASIC.Product-update'
+      responses:
+        '204':
+          description: Success
+        4XX:
+          $ref: '#/components/responses/error'
+    delete:
+      summary: Delete entity from ProductSet
+      tags:
+        - ProductSet
+      responses:
+        '204':
+          description: Success
+        4XX:
+          $ref: '#/components/responses/error'
+  '/ProductSet(''{ProductID}'')/ToSupplier':
+    parameters:
+      - name: ProductID
+        in: path
+        required: true
+        description: 'EPM: Product ID'
+        schema:
+          type: string
+          maxLength: 10
+    get:
+      summary: Get related ToSupplier
+      tags:
+        - ProductSet
+        - BusinessPartnerSet
+      parameters:
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - Address
+                - BusinessPartnerID
+                - CompanyName
+                - WebAddress
+                - EmailAddress
+                - PhoneNumber
+                - FaxNumber
+                - LegalForm
+                - CurrencyCode
+                - BusinessPartnerRole
+                - CreatedAt
+                - ChangedAt
+                - ToSalesOrders
+                - ToContacts
+                - ToProducts
+        - name: $expand
+          in: query
+          description: >-
+            Expand related entities, see
+            [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - ToSalesOrders
+                - ToContacts
+                - ToProducts
+      responses:
+        '200':
+          description: Retrieved entity
+          content:
+            application/json:
+              schema:
+                title: BusinessPartner
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/GWSAMPLE_BASIC.BusinessPartner'
+        4XX:
+          $ref: '#/components/responses/error'
+  '/ProductSet(''{ProductID}'')/ToSalesOrderLineItems':
+    parameters:
+      - name: ProductID
+        in: path
+        required: true
+        description: 'EPM: Product ID'
+        schema:
+          type: string
+          maxLength: 10
+    get:
+      summary: Get entities from related ToSalesOrderLineItems
+      tags:
+        - ProductSet
+        - SalesOrderLineItemSet
+      parameters:
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/skip'
+        - name: $filter
+          in: query
+          description: >-
+            Filter items by property values, see
+            [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)
+          schema:
+            type: string
+        - $ref: '#/components/parameters/count'
+        - name: $orderby
+          in: query
+          description: >-
+            Order items by property values, see
+            [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - SalesOrderID
+                - SalesOrderID desc
+                - ItemPosition
+                - ItemPosition desc
+                - ProductID
+                - ProductID desc
+                - CurrencyCode
+                - CurrencyCode desc
+                - GrossAmount
+                - GrossAmount desc
+                - NetAmount
+                - NetAmount desc
+                - TaxAmount
+                - TaxAmount desc
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - SalesOrderID
+                - ItemPosition
+                - ProductID
+                - Note
+                - NoteLanguage
+                - CurrencyCode
+                - GrossAmount
+                - NetAmount
+                - TaxAmount
+                - DeliveryDate
+                - Quantity
+                - QuantityUnit
+                - ToHeader
+                - ToProduct
+        - name: $expand
+          in: query
+          description: >-
+            Expand related entities, see
+            [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - ToHeader
+                - ToProduct
+      responses:
+        '200':
+          description: Retrieved entities
+          content:
+            application/json:
+              schema:
+                title: Wrapper
+                type: object
+                properties:
+                  d:
+                    title: Collection of SalesOrderLineItem
+                    type: object
+                    properties:
+                      __count:
+                        $ref: '#/components/schemas/count'
+                      results:
+                        type: array
+                        items:
+                          $ref: >-
+                            #/components/schemas/GWSAMPLE_BASIC.SalesOrderLineItem
+        4XX:
+          $ref: '#/components/responses/error'
+    post:
+      summary: Add new entity to related ToSalesOrderLineItems
+      tags:
+        - ProductSet
+        - SalesOrderLineItemSet
+      requestBody:
+        required: true
+        description: New entity
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GWSAMPLE_BASIC.SalesOrderLineItem-create'
+      responses:
+        '201':
+          description: Created entity
+          content:
+            application/json:
+              schema:
+                title: SalesOrderLineItem
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/GWSAMPLE_BASIC.SalesOrderLineItem'
+        4XX:
+          $ref: '#/components/responses/error'
+  /SalesOrderSet:
+    get:
+      summary: Get entities from SalesOrderSet
+      tags:
+        - SalesOrderSet
+      parameters:
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/skip'
+        - name: $filter
+          in: query
+          description: >-
+            Filter items by property values, see
+            [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)
+          schema:
+            type: string
+        - $ref: '#/components/parameters/count'
+        - name: $orderby
+          in: query
+          description: >-
+            Order items by property values, see
+            [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - SalesOrderID
+                - SalesOrderID desc
+                - CustomerID
+                - CustomerID desc
+                - CustomerName
+                - CustomerName desc
+                - CurrencyCode
+                - CurrencyCode desc
+                - GrossAmount
+                - GrossAmount desc
+                - NetAmount
+                - NetAmount desc
+                - TaxAmount
+                - TaxAmount desc
+                - LifecycleStatus
+                - LifecycleStatus desc
+                - BillingStatus
+                - BillingStatus desc
+                - DeliveryStatus
+                - DeliveryStatus desc
+                - CreatedAt
+                - CreatedAt desc
+                - ChangedAt
+                - ChangedAt desc
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - SalesOrderID
+                - Note
+                - NoteLanguage
+                - CustomerID
+                - CustomerName
+                - CurrencyCode
+                - GrossAmount
+                - NetAmount
+                - TaxAmount
+                - LifecycleStatus
+                - LifecycleStatusDescription
+                - BillingStatus
+                - BillingStatusDescription
+                - DeliveryStatus
+                - DeliveryStatusDescription
+                - CreatedAt
+                - ChangedAt
+                - ToBusinessPartner
+                - ToLineItems
+        - name: $expand
+          in: query
+          description: >-
+            Expand related entities, see
+            [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - ToBusinessPartner
+                - ToLineItems
+      responses:
+        '200':
+          description: Retrieved entities
+          content:
+            application/json:
+              schema:
+                title: Wrapper
+                type: object
+                properties:
+                  d:
+                    title: Collection of SalesOrder
+                    type: object
+                    properties:
+                      __count:
+                        $ref: '#/components/schemas/count'
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/GWSAMPLE_BASIC.SalesOrder'
+        4XX:
+          $ref: '#/components/responses/error'
+    post:
+      summary: Add new entity to SalesOrderSet
+      tags:
+        - SalesOrderSet
+      requestBody:
+        required: true
+        description: New entity
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GWSAMPLE_BASIC.SalesOrder-create'
+      responses:
+        '201':
+          description: Created entity
+          content:
+            application/json:
+              schema:
+                title: SalesOrder
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/GWSAMPLE_BASIC.SalesOrder'
+        4XX:
+          $ref: '#/components/responses/error'
+  '/SalesOrderSet(''{SalesOrderID}'')':
+    parameters:
+      - name: SalesOrderID
+        in: path
+        required: true
+        description: 'EPM: Sales Order Number'
+        schema:
+          type: string
+          maxLength: 10
+    get:
+      summary: Get entity from SalesOrderSet by key
+      tags:
+        - SalesOrderSet
+      parameters:
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - SalesOrderID
+                - Note
+                - NoteLanguage
+                - CustomerID
+                - CustomerName
+                - CurrencyCode
+                - GrossAmount
+                - NetAmount
+                - TaxAmount
+                - LifecycleStatus
+                - LifecycleStatusDescription
+                - BillingStatus
+                - BillingStatusDescription
+                - DeliveryStatus
+                - DeliveryStatusDescription
+                - CreatedAt
+                - ChangedAt
+                - ToBusinessPartner
+                - ToLineItems
+        - name: $expand
+          in: query
+          description: >-
+            Expand related entities, see
+            [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - ToBusinessPartner
+                - ToLineItems
+      responses:
+        '200':
+          description: Retrieved entity
+          content:
+            application/json:
+              schema:
+                title: SalesOrder
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/GWSAMPLE_BASIC.SalesOrder'
+        4XX:
+          $ref: '#/components/responses/error'
+    delete:
+      summary: Delete entity from SalesOrderSet
+      tags:
+        - SalesOrderSet
+      responses:
+        '204':
+          description: Success
+        4XX:
+          $ref: '#/components/responses/error'
+  '/SalesOrderSet(''{SalesOrderID}'')/ToBusinessPartner':
+    parameters:
+      - name: SalesOrderID
+        in: path
+        required: true
+        description: 'EPM: Sales Order Number'
+        schema:
+          type: string
+          maxLength: 10
+    get:
+      summary: Get related ToBusinessPartner
+      tags:
+        - SalesOrderSet
+        - BusinessPartnerSet
+      parameters:
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - Address
+                - BusinessPartnerID
+                - CompanyName
+                - WebAddress
+                - EmailAddress
+                - PhoneNumber
+                - FaxNumber
+                - LegalForm
+                - CurrencyCode
+                - BusinessPartnerRole
+                - CreatedAt
+                - ChangedAt
+                - ToSalesOrders
+                - ToContacts
+                - ToProducts
+        - name: $expand
+          in: query
+          description: >-
+            Expand related entities, see
+            [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - ToSalesOrders
+                - ToContacts
+                - ToProducts
+      responses:
+        '200':
+          description: Retrieved entity
+          content:
+            application/json:
+              schema:
+                title: BusinessPartner
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/GWSAMPLE_BASIC.BusinessPartner'
+        4XX:
+          $ref: '#/components/responses/error'
+  '/SalesOrderSet(''{SalesOrderID}'')/ToLineItems':
+    parameters:
+      - name: SalesOrderID
+        in: path
+        required: true
+        description: 'EPM: Sales Order Number'
+        schema:
+          type: string
+          maxLength: 10
+    get:
+      summary: Get entities from related ToLineItems
+      tags:
+        - SalesOrderSet
+        - SalesOrderLineItemSet
+      parameters:
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/skip'
+        - name: $filter
+          in: query
+          description: >-
+            Filter items by property values, see
+            [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)
+          schema:
+            type: string
+        - $ref: '#/components/parameters/count'
+        - name: $orderby
+          in: query
+          description: >-
+            Order items by property values, see
+            [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - SalesOrderID
+                - SalesOrderID desc
+                - ItemPosition
+                - ItemPosition desc
+                - ProductID
+                - ProductID desc
+                - CurrencyCode
+                - CurrencyCode desc
+                - GrossAmount
+                - GrossAmount desc
+                - NetAmount
+                - NetAmount desc
+                - TaxAmount
+                - TaxAmount desc
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - SalesOrderID
+                - ItemPosition
+                - ProductID
+                - Note
+                - NoteLanguage
+                - CurrencyCode
+                - GrossAmount
+                - NetAmount
+                - TaxAmount
+                - DeliveryDate
+                - Quantity
+                - QuantityUnit
+                - ToHeader
+                - ToProduct
+        - name: $expand
+          in: query
+          description: >-
+            Expand related entities, see
+            [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - ToHeader
+                - ToProduct
+      responses:
+        '200':
+          description: Retrieved entities
+          content:
+            application/json:
+              schema:
+                title: Wrapper
+                type: object
+                properties:
+                  d:
+                    title: Collection of SalesOrderLineItem
+                    type: object
+                    properties:
+                      __count:
+                        $ref: '#/components/schemas/count'
+                      results:
+                        type: array
+                        items:
+                          $ref: >-
+                            #/components/schemas/GWSAMPLE_BASIC.SalesOrderLineItem
+        4XX:
+          $ref: '#/components/responses/error'
+    post:
+      summary: Add new entity to related ToLineItems
+      tags:
+        - SalesOrderSet
+        - SalesOrderLineItemSet
+      requestBody:
+        required: true
+        description: New entity
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GWSAMPLE_BASIC.SalesOrderLineItem-create'
+      responses:
+        '201':
+          description: Created entity
+          content:
+            application/json:
+              schema:
+                title: SalesOrderLineItem
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/GWSAMPLE_BASIC.SalesOrderLineItem'
+        4XX:
+          $ref: '#/components/responses/error'
+  /SalesOrderLineItemSet:
+    get:
+      summary: Get entities from SalesOrderLineItemSet
+      tags:
+        - SalesOrderLineItemSet
+      parameters:
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/skip'
+        - name: $filter
+          in: query
+          description: >-
+            Filter items by property values, see
+            [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)
+          schema:
+            type: string
+        - $ref: '#/components/parameters/count'
+        - name: $orderby
+          in: query
+          description: >-
+            Order items by property values, see
+            [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - SalesOrderID
+                - SalesOrderID desc
+                - ItemPosition
+                - ItemPosition desc
+                - ProductID
+                - ProductID desc
+                - CurrencyCode
+                - CurrencyCode desc
+                - GrossAmount
+                - GrossAmount desc
+                - NetAmount
+                - NetAmount desc
+                - TaxAmount
+                - TaxAmount desc
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - SalesOrderID
+                - ItemPosition
+                - ProductID
+                - Note
+                - NoteLanguage
+                - CurrencyCode
+                - GrossAmount
+                - NetAmount
+                - TaxAmount
+                - DeliveryDate
+                - Quantity
+                - QuantityUnit
+                - ToHeader
+                - ToProduct
+        - name: $expand
+          in: query
+          description: >-
+            Expand related entities, see
+            [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - ToHeader
+                - ToProduct
+      responses:
+        '200':
+          description: Retrieved entities
+          content:
+            application/json:
+              schema:
+                title: Wrapper
+                type: object
+                properties:
+                  d:
+                    title: Collection of SalesOrderLineItem
+                    type: object
+                    properties:
+                      __count:
+                        $ref: '#/components/schemas/count'
+                      results:
+                        type: array
+                        items:
+                          $ref: >-
+                            #/components/schemas/GWSAMPLE_BASIC.SalesOrderLineItem
+        4XX:
+          $ref: '#/components/responses/error'
+    post:
+      summary: Add new entity to SalesOrderLineItemSet
+      tags:
+        - SalesOrderLineItemSet
+      requestBody:
+        required: true
+        description: New entity
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GWSAMPLE_BASIC.SalesOrderLineItem-create'
+      responses:
+        '201':
+          description: Created entity
+          content:
+            application/json:
+              schema:
+                title: SalesOrderLineItem
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/GWSAMPLE_BASIC.SalesOrderLineItem'
+        4XX:
+          $ref: '#/components/responses/error'
+  '/SalesOrderLineItemSet(SalesOrderID=''{SalesOrderID}'',ItemPosition=''{ItemPosition}'')':
+    parameters:
+      - name: SalesOrderID
+        in: path
+        required: true
+        description: 'EPM: Sales Order Number'
+        schema:
+          type: string
+          maxLength: 10
+      - name: ItemPosition
+        in: path
+        required: true
+        description: 'EPM: Sales Order Item Position'
+        schema:
+          type: string
+          maxLength: 10
+    get:
+      summary: Get entity from SalesOrderLineItemSet by key
+      tags:
+        - SalesOrderLineItemSet
+      parameters:
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - SalesOrderID
+                - ItemPosition
+                - ProductID
+                - Note
+                - NoteLanguage
+                - CurrencyCode
+                - GrossAmount
+                - NetAmount
+                - TaxAmount
+                - DeliveryDate
+                - Quantity
+                - QuantityUnit
+                - ToHeader
+                - ToProduct
+        - name: $expand
+          in: query
+          description: >-
+            Expand related entities, see
+            [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - ToHeader
+                - ToProduct
+      responses:
+        '200':
+          description: Retrieved entity
+          content:
+            application/json:
+              schema:
+                title: SalesOrderLineItem
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/GWSAMPLE_BASIC.SalesOrderLineItem'
+        4XX:
+          $ref: '#/components/responses/error'
+    put:
+      summary: Update entity in SalesOrderLineItemSet
+      tags:
+        - SalesOrderLineItemSet
+      requestBody:
+        required: true
+        description: New property values
+        content:
+          application/json:
+            schema:
+              title: Modified SalesOrderLineItem
+              type: object
+              properties:
+                d:
+                  $ref: >-
+                    #/components/schemas/GWSAMPLE_BASIC.SalesOrderLineItem-update
+      responses:
+        '204':
+          description: Success
+        4XX:
+          $ref: '#/components/responses/error'
+    delete:
+      summary: Delete entity from SalesOrderLineItemSet
+      tags:
+        - SalesOrderLineItemSet
+      responses:
+        '204':
+          description: Success
+        4XX:
+          $ref: '#/components/responses/error'
+  '/SalesOrderLineItemSet(SalesOrderID=''{SalesOrderID}'',ItemPosition=''{ItemPosition}'')/ToHeader':
+    parameters:
+      - name: SalesOrderID
+        in: path
+        required: true
+        description: 'EPM: Sales Order Number'
+        schema:
+          type: string
+          maxLength: 10
+      - name: ItemPosition
+        in: path
+        required: true
+        description: 'EPM: Sales Order Item Position'
+        schema:
+          type: string
+          maxLength: 10
+    get:
+      summary: Get related ToHeader
+      tags:
+        - SalesOrderLineItemSet
+        - SalesOrderSet
+      parameters:
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - SalesOrderID
+                - Note
+                - NoteLanguage
+                - CustomerID
+                - CustomerName
+                - CurrencyCode
+                - GrossAmount
+                - NetAmount
+                - TaxAmount
+                - LifecycleStatus
+                - LifecycleStatusDescription
+                - BillingStatus
+                - BillingStatusDescription
+                - DeliveryStatus
+                - DeliveryStatusDescription
+                - CreatedAt
+                - ChangedAt
+                - ToBusinessPartner
+                - ToLineItems
+        - name: $expand
+          in: query
+          description: >-
+            Expand related entities, see
+            [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - ToBusinessPartner
+                - ToLineItems
+      responses:
+        '200':
+          description: Retrieved entity
+          content:
+            application/json:
+              schema:
+                title: SalesOrder
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/GWSAMPLE_BASIC.SalesOrder'
+        4XX:
+          $ref: '#/components/responses/error'
+  '/SalesOrderLineItemSet(SalesOrderID=''{SalesOrderID}'',ItemPosition=''{ItemPosition}'')/ToProduct':
+    parameters:
+      - name: SalesOrderID
+        in: path
+        required: true
+        description: 'EPM: Sales Order Number'
+        schema:
+          type: string
+          maxLength: 10
+      - name: ItemPosition
+        in: path
+        required: true
+        description: 'EPM: Sales Order Item Position'
+        schema:
+          type: string
+          maxLength: 10
+    get:
+      summary: Get related ToProduct
+      tags:
+        - SalesOrderLineItemSet
+        - ProductSet
+      parameters:
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - ProductID
+                - TypeCode
+                - Category
+                - Name
+                - NameLanguage
+                - Description
+                - DescriptionLanguage
+                - SupplierID
+                - SupplierName
+                - TaxTarifCode
+                - MeasureUnit
+                - WeightMeasure
+                - WeightUnit
+                - CurrencyCode
+                - Price
+                - Width
+                - Depth
+                - Height
+                - DimUnit
+                - CreatedAt
+                - ChangedAt
+                - ToSupplier
+                - ToSalesOrderLineItems
+        - name: $expand
+          in: query
+          description: >-
+            Expand related entities, see
+            [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - ToSupplier
+                - ToSalesOrderLineItems
+      responses:
+        '200':
+          description: Retrieved entity
+          content:
+            application/json:
+              schema:
+                title: Product
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/GWSAMPLE_BASIC.Product'
+        4XX:
+          $ref: '#/components/responses/error'
+  /ContactSet:
+    get:
+      summary: Get entities from ContactSet
+      tags:
+        - ContactSet
+      parameters:
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/skip'
+        - name: $filter
+          in: query
+          description: >-
+            Filter items by property values, see
+            [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)
+          schema:
+            type: string
+        - $ref: '#/components/parameters/count'
+        - name: $orderby
+          in: query
+          description: >-
+            Order items by property values, see
+            [Sorting](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - Address
+                - Address desc
+                - ContactGuid
+                - ContactGuid desc
+                - BusinessPartnerID
+                - BusinessPartnerID desc
+                - Title
+                - Title desc
+                - FirstName
+                - FirstName desc
+                - MiddleName
+                - MiddleName desc
+                - LastName
+                - LastName desc
+                - Nickname
+                - Nickname desc
+                - Initials
+                - Initials desc
+                - Sex
+                - Sex desc
+                - PhoneNumber
+                - PhoneNumber desc
+                - FaxNumber
+                - FaxNumber desc
+                - EmailAddress
+                - EmailAddress desc
+                - Language
+                - Language desc
+                - DateOfBirth
+                - DateOfBirth desc
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - Address
+                - ContactGuid
+                - BusinessPartnerID
+                - Title
+                - FirstName
+                - MiddleName
+                - LastName
+                - Nickname
+                - Initials
+                - Sex
+                - PhoneNumber
+                - FaxNumber
+                - EmailAddress
+                - Language
+                - DateOfBirth
+                - ToBusinessPartner
+        - name: $expand
+          in: query
+          description: >-
+            Expand related entities, see
+            [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - ToBusinessPartner
+      responses:
+        '200':
+          description: Retrieved entities
+          content:
+            application/json:
+              schema:
+                title: Wrapper
+                type: object
+                properties:
+                  d:
+                    title: Collection of Contact
+                    type: object
+                    properties:
+                      __count:
+                        $ref: '#/components/schemas/count'
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/GWSAMPLE_BASIC.Contact'
+        4XX:
+          $ref: '#/components/responses/error'
+    post:
+      summary: Add new entity to ContactSet
+      tags:
+        - ContactSet
+      requestBody:
+        required: true
+        description: New entity
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GWSAMPLE_BASIC.Contact-create'
+      responses:
+        '201':
+          description: Created entity
+          content:
+            application/json:
+              schema:
+                title: Contact
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/GWSAMPLE_BASIC.Contact'
+        4XX:
+          $ref: '#/components/responses/error'
+  '/ContactSet(guid''{ContactGuid}'')':
+    parameters:
+      - name: ContactGuid
+        in: path
+        required: true
+        description: 'SAP Gateway Sample Service: Contact GUID'
+        schema:
+          type: string
+          format: uuid
+          example: 01234567-89ab-cdef-0123-456789abcdef
+    get:
+      summary: Get entity from ContactSet by key
+      tags:
+        - ContactSet
+      parameters:
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - Address
+                - ContactGuid
+                - BusinessPartnerID
+                - Title
+                - FirstName
+                - MiddleName
+                - LastName
+                - Nickname
+                - Initials
+                - Sex
+                - PhoneNumber
+                - FaxNumber
+                - EmailAddress
+                - Language
+                - DateOfBirth
+                - ToBusinessPartner
+        - name: $expand
+          in: query
+          description: >-
+            Expand related entities, see
+            [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - ToBusinessPartner
+      responses:
+        '200':
+          description: Retrieved entity
+          content:
+            application/json:
+              schema:
+                title: Contact
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/GWSAMPLE_BASIC.Contact'
+        4XX:
+          $ref: '#/components/responses/error'
+    put:
+      summary: Update entity in ContactSet
+      tags:
+        - ContactSet
+      requestBody:
+        required: true
+        description: New property values
+        content:
+          application/json:
+            schema:
+              title: Modified Contact
+              type: object
+              properties:
+                d:
+                  $ref: '#/components/schemas/GWSAMPLE_BASIC.Contact-update'
+      responses:
+        '204':
+          description: Success
+        4XX:
+          $ref: '#/components/responses/error'
+    delete:
+      summary: Delete entity from ContactSet
+      tags:
+        - ContactSet
+      responses:
+        '204':
+          description: Success
+        4XX:
+          $ref: '#/components/responses/error'
+  '/ContactSet(guid''{ContactGuid}'')/ToBusinessPartner':
+    parameters:
+      - name: ContactGuid
+        in: path
+        required: true
+        description: 'SAP Gateway Sample Service: Contact GUID'
+        schema:
+          type: string
+          format: uuid
+          example: 01234567-89ab-cdef-0123-456789abcdef
+    get:
+      summary: Get related ToBusinessPartner
+      tags:
+        - ContactSet
+        - BusinessPartnerSet
+      parameters:
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - Address
+                - BusinessPartnerID
+                - CompanyName
+                - WebAddress
+                - EmailAddress
+                - PhoneNumber
+                - FaxNumber
+                - LegalForm
+                - CurrencyCode
+                - BusinessPartnerRole
+                - CreatedAt
+                - ChangedAt
+                - ToSalesOrders
+                - ToContacts
+                - ToProducts
+        - name: $expand
+          in: query
+          description: >-
+            Expand related entities, see
+            [Expand](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=63)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - ToSalesOrders
+                - ToContacts
+                - ToProducts
+      responses:
+        '200':
+          description: Retrieved entity
+          content:
+            application/json:
+              schema:
+                title: BusinessPartner
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/GWSAMPLE_BASIC.BusinessPartner'
+        4XX:
+          $ref: '#/components/responses/error'
+  /VH_SexSet:
+    get:
+      summary: Get entities from VH_SexSet
+      tags:
+        - VH_SexSet
+      parameters:
+        - name: $filter
+          in: query
+          description: >-
+            Filter items by property values, see
+            [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)
+          schema:
+            type: string
+        - $ref: '#/components/parameters/count'
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - Sex
+                - Shorttext
+      responses:
+        '200':
+          description: Retrieved entities
+          content:
+            application/json:
+              schema:
+                title: Wrapper
+                type: object
+                properties:
+                  d:
+                    title: Collection of VH_Sex
+                    type: object
+                    properties:
+                      __count:
+                        $ref: '#/components/schemas/count'
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/GWSAMPLE_BASIC.VH_Sex'
+        4XX:
+          $ref: '#/components/responses/error'
+  '/VH_SexSet(''{Sex}'')':
+    parameters:
+      - name: Sex
+        in: path
+        required: true
+        description: 'EPM: Gender'
+        schema:
+          type: string
+          maxLength: 1
+    get:
+      summary: Get entity from VH_SexSet by key
+      tags:
+        - VH_SexSet
+      parameters:
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - Sex
+                - Shorttext
+      responses:
+        '200':
+          description: Retrieved entity
+          content:
+            application/json:
+              schema:
+                title: VH_Sex
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/GWSAMPLE_BASIC.VH_Sex'
+        4XX:
+          $ref: '#/components/responses/error'
+  /VH_CountrySet:
+    get:
+      summary: Get entities from VH_CountrySet
+      tags:
+        - VH_CountrySet
+      parameters:
+        - name: $filter
+          in: query
+          description: >-
+            Filter items by property values, see
+            [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)
+          schema:
+            type: string
+        - $ref: '#/components/parameters/count'
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - Land1
+                - Landx
+                - Natio
+      responses:
+        '200':
+          description: Retrieved entities
+          content:
+            application/json:
+              schema:
+                title: Wrapper
+                type: object
+                properties:
+                  d:
+                    title: Collection of VH_Country
+                    type: object
+                    properties:
+                      __count:
+                        $ref: '#/components/schemas/count'
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/GWSAMPLE_BASIC.VH_Country'
+        4XX:
+          $ref: '#/components/responses/error'
+  '/VH_CountrySet(''{Land1}'')':
+    parameters:
+      - name: Land1
+        in: path
+        required: true
+        description: >-
+          Country/Region Key  
+
+          The country/region key contains information which the system uses to
+          check entries such as the length of the postal code or bank account
+          number.  
+
+          The two-character ISO code in accordance with ISO 3166, which is
+          delivered by SAP as a default, is usually used.  
+
+          It could also be the vehicle license plate country/region code or a
+          typical country/region key, for example, in Germany the Federal
+          statistics office key.  
+
+          The country/region keys are determined at system installation in the
+          global settings.  
+
+          The definition of the country/region keys in the SAP system does not
+          necessarily have to match political or state units.  
+
+          Since the country/region key does not have to correspond to the ISO
+          code in all installations, programs that differ according to certain
+          values of the country/region key cannot query the country/region key
+          T005-LAND1, but have to program based on the ISO code T005 INTCA.
+        schema:
+          type: string
+          maxLength: 3
+    get:
+      summary: Get entity from VH_CountrySet by key
+      tags:
+        - VH_CountrySet
+      parameters:
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - Land1
+                - Landx
+                - Natio
+      responses:
+        '200':
+          description: Retrieved entity
+          content:
+            application/json:
+              schema:
+                title: VH_Country
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/GWSAMPLE_BASIC.VH_Country'
+        4XX:
+          $ref: '#/components/responses/error'
+  /VH_AddressTypeSet:
+    get:
+      summary: Get entities from VH_AddressTypeSet
+      tags:
+        - VH_AddressTypeSet
+      parameters:
+        - name: $filter
+          in: query
+          description: >-
+            Filter items by property values, see
+            [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)
+          schema:
+            type: string
+        - $ref: '#/components/parameters/count'
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - AddressType
+                - Shorttext
+      responses:
+        '200':
+          description: Retrieved entities
+          content:
+            application/json:
+              schema:
+                title: Wrapper
+                type: object
+                properties:
+                  d:
+                    title: Collection of VH_AddressType
+                    type: object
+                    properties:
+                      __count:
+                        $ref: '#/components/schemas/count'
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/GWSAMPLE_BASIC.VH_AddressType'
+        4XX:
+          $ref: '#/components/responses/error'
+  '/VH_AddressTypeSet(''{AddressType}'')':
+    parameters:
+      - name: AddressType
+        in: path
+        required: true
+        description: 'EPM: Address Type'
+        schema:
+          type: string
+          maxLength: 2
+    get:
+      summary: Get entity from VH_AddressTypeSet by key
+      tags:
+        - VH_AddressTypeSet
+      parameters:
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - AddressType
+                - Shorttext
+      responses:
+        '200':
+          description: Retrieved entity
+          content:
+            application/json:
+              schema:
+                title: VH_AddressType
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/GWSAMPLE_BASIC.VH_AddressType'
+        4XX:
+          $ref: '#/components/responses/error'
+  /VH_CategorySet:
+    get:
+      summary: Get entities from VH_CategorySet
+      tags:
+        - VH_CategorySet
+      parameters:
+        - name: $filter
+          in: query
+          description: >-
+            Filter items by property values, see
+            [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)
+          schema:
+            type: string
+        - $ref: '#/components/parameters/count'
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - Category
+      responses:
+        '200':
+          description: Retrieved entities
+          content:
+            application/json:
+              schema:
+                title: Wrapper
+                type: object
+                properties:
+                  d:
+                    title: Collection of VH_Category
+                    type: object
+                    properties:
+                      __count:
+                        $ref: '#/components/schemas/count'
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/GWSAMPLE_BASIC.VH_Category'
+        4XX:
+          $ref: '#/components/responses/error'
+  '/VH_CategorySet(''{Category}'')':
+    parameters:
+      - name: Category
+        in: path
+        required: true
+        description: 'EPM: Product Category'
+        schema:
+          type: string
+          maxLength: 40
+    get:
+      summary: Get entity from VH_CategorySet by key
+      tags:
+        - VH_CategorySet
+      parameters:
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - Category
+      responses:
+        '200':
+          description: Retrieved entity
+          content:
+            application/json:
+              schema:
+                title: VH_Category
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/GWSAMPLE_BASIC.VH_Category'
+        4XX:
+          $ref: '#/components/responses/error'
+  /VH_CurrencySet:
+    get:
+      summary: Get entities from VH_CurrencySet
+      tags:
+        - VH_CurrencySet
+      parameters:
+        - name: $filter
+          in: query
+          description: >-
+            Filter items by property values, see
+            [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)
+          schema:
+            type: string
+        - $ref: '#/components/parameters/count'
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - Waers
+                - Ltext
+      responses:
+        '200':
+          description: Retrieved entities
+          content:
+            application/json:
+              schema:
+                title: Wrapper
+                type: object
+                properties:
+                  d:
+                    title: Collection of VH_Currency
+                    type: object
+                    properties:
+                      __count:
+                        $ref: '#/components/schemas/count'
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/GWSAMPLE_BASIC.VH_Currency'
+        4XX:
+          $ref: '#/components/responses/error'
+  '/VH_CurrencySet(''{Waers}'')':
+    parameters:
+      - name: Waers
+        in: path
+        required: true
+        description: |-
+          Currency Key  
+          Key for the currency in which the amounts are managed in the system.
+        schema:
+          type: string
+          maxLength: 5
+    get:
+      summary: Get entity from VH_CurrencySet by key
+      tags:
+        - VH_CurrencySet
+      parameters:
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - Waers
+                - Ltext
+      responses:
+        '200':
+          description: Retrieved entity
+          content:
+            application/json:
+              schema:
+                title: VH_Currency
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/GWSAMPLE_BASIC.VH_Currency'
+        4XX:
+          $ref: '#/components/responses/error'
+  /VH_UnitQuantitySet:
+    get:
+      summary: Get entities from VH_UnitQuantitySet
+      tags:
+        - VH_UnitQuantitySet
+      parameters:
+        - name: $filter
+          in: query
+          description: >-
+            Filter items by property values, see
+            [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)
+          schema:
+            type: string
+        - $ref: '#/components/parameters/count'
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - Msehi
+                - Msehl
+      responses:
+        '200':
+          description: Retrieved entities
+          content:
+            application/json:
+              schema:
+                title: Wrapper
+                type: object
+                properties:
+                  d:
+                    title: Collection of VH_UnitQuantity
+                    type: object
+                    properties:
+                      __count:
+                        $ref: '#/components/schemas/count'
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/GWSAMPLE_BASIC.VH_UnitQuantity'
+        4XX:
+          $ref: '#/components/responses/error'
+  '/VH_UnitQuantitySet(''{Msehi}'')':
+    parameters:
+      - name: Msehi
+        in: path
+        required: true
+        description: >-
+          Unit of Measurement  
+
+          Internal, language-independent, measurement unit format.  
+
+          This format is used for internal processing.  
+
+          The internal format is automatically replaced by either the external
+          commercial (three-character) or technical (six-character) format
+          before output to the screen.
+        schema:
+          type: string
+          maxLength: 3
+    get:
+      summary: Get entity from VH_UnitQuantitySet by key
+      tags:
+        - VH_UnitQuantitySet
+      parameters:
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - Msehi
+                - Msehl
+      responses:
+        '200':
+          description: Retrieved entity
+          content:
+            application/json:
+              schema:
+                title: VH_UnitQuantity
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/GWSAMPLE_BASIC.VH_UnitQuantity'
+        4XX:
+          $ref: '#/components/responses/error'
+  /VH_UnitWeightSet:
+    get:
+      summary: Get entities from VH_UnitWeightSet
+      tags:
+        - VH_UnitWeightSet
+      parameters:
+        - name: $filter
+          in: query
+          description: >-
+            Filter items by property values, see
+            [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)
+          schema:
+            type: string
+        - $ref: '#/components/parameters/count'
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - Msehi
+                - Msehl
+      responses:
+        '200':
+          description: Retrieved entities
+          content:
+            application/json:
+              schema:
+                title: Wrapper
+                type: object
+                properties:
+                  d:
+                    title: Collection of VH_UnitWeight
+                    type: object
+                    properties:
+                      __count:
+                        $ref: '#/components/schemas/count'
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/GWSAMPLE_BASIC.VH_UnitWeight'
+        4XX:
+          $ref: '#/components/responses/error'
+  '/VH_UnitWeightSet(''{Msehi}'')':
+    parameters:
+      - name: Msehi
+        in: path
+        required: true
+        description: >-
+          Unit of Measurement  
+
+          Internal, language-independent, measurement unit format.  
+
+          This format is used for internal processing.  
+
+          The internal format is automatically replaced by either the external
+          commercial (three-character) or technical (six-character) format
+          before output to the screen.
+        schema:
+          type: string
+          maxLength: 3
+    get:
+      summary: Get entity from VH_UnitWeightSet by key
+      tags:
+        - VH_UnitWeightSet
+      parameters:
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - Msehi
+                - Msehl
+      responses:
+        '200':
+          description: Retrieved entity
+          content:
+            application/json:
+              schema:
+                title: VH_UnitWeight
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/GWSAMPLE_BASIC.VH_UnitWeight'
+        4XX:
+          $ref: '#/components/responses/error'
+  /VH_UnitLengthSet:
+    get:
+      summary: Get entities from VH_UnitLengthSet
+      tags:
+        - VH_UnitLengthSet
+      parameters:
+        - name: $filter
+          in: query
+          description: >-
+            Filter items by property values, see
+            [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)
+          schema:
+            type: string
+        - $ref: '#/components/parameters/count'
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - Msehi
+                - Msehl
+      responses:
+        '200':
+          description: Retrieved entities
+          content:
+            application/json:
+              schema:
+                title: Wrapper
+                type: object
+                properties:
+                  d:
+                    title: Collection of VH_UnitLength
+                    type: object
+                    properties:
+                      __count:
+                        $ref: '#/components/schemas/count'
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/GWSAMPLE_BASIC.VH_UnitLength'
+        4XX:
+          $ref: '#/components/responses/error'
+  '/VH_UnitLengthSet(''{Msehi}'')':
+    parameters:
+      - name: Msehi
+        in: path
+        required: true
+        description: >-
+          Unit of Measurement  
+
+          Internal, language-independent, measurement unit format.  
+
+          This format is used for internal processing.  
+
+          The internal format is automatically replaced by either the external
+          commercial (three-character) or technical (six-character) format
+          before output to the screen.
+        schema:
+          type: string
+          maxLength: 3
+    get:
+      summary: Get entity from VH_UnitLengthSet by key
+      tags:
+        - VH_UnitLengthSet
+      parameters:
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - Msehi
+                - Msehl
+      responses:
+        '200':
+          description: Retrieved entity
+          content:
+            application/json:
+              schema:
+                title: VH_UnitLength
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/GWSAMPLE_BASIC.VH_UnitLength'
+        4XX:
+          $ref: '#/components/responses/error'
+  /VH_ProductTypeCodeSet:
+    get:
+      summary: Get entities from VH_ProductTypeCodeSet
+      tags:
+        - VH_ProductTypeCodeSet
+      parameters:
+        - name: $filter
+          in: query
+          description: >-
+            Filter items by property values, see
+            [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)
+          schema:
+            type: string
+        - $ref: '#/components/parameters/count'
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - TypeCode
+                - Shorttext
+      responses:
+        '200':
+          description: Retrieved entities
+          content:
+            application/json:
+              schema:
+                title: Wrapper
+                type: object
+                properties:
+                  d:
+                    title: Collection of VH_ProductTypeCode
+                    type: object
+                    properties:
+                      __count:
+                        $ref: '#/components/schemas/count'
+                      results:
+                        type: array
+                        items:
+                          $ref: >-
+                            #/components/schemas/GWSAMPLE_BASIC.VH_ProductTypeCode
+        4XX:
+          $ref: '#/components/responses/error'
+  '/VH_ProductTypeCodeSet(''{TypeCode}'')':
+    parameters:
+      - name: TypeCode
+        in: path
+        required: true
+        description: 'EPM: Product Type Code'
+        schema:
+          type: string
+          maxLength: 2
+    get:
+      summary: Get entity from VH_ProductTypeCodeSet by key
+      tags:
+        - VH_ProductTypeCodeSet
+      parameters:
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - TypeCode
+                - Shorttext
+      responses:
+        '200':
+          description: Retrieved entity
+          content:
+            application/json:
+              schema:
+                title: VH_ProductTypeCode
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/GWSAMPLE_BASIC.VH_ProductTypeCode'
+        4XX:
+          $ref: '#/components/responses/error'
+  /VH_BPRoleSet:
+    get:
+      summary: Get entities from VH_BPRoleSet
+      tags:
+        - VH_BPRoleSet
+      parameters:
+        - name: $filter
+          in: query
+          description: >-
+            Filter items by property values, see
+            [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)
+          schema:
+            type: string
+        - $ref: '#/components/parameters/count'
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - BpRole
+                - Shorttext
+      responses:
+        '200':
+          description: Retrieved entities
+          content:
+            application/json:
+              schema:
+                title: Wrapper
+                type: object
+                properties:
+                  d:
+                    title: Collection of VH_BPRole
+                    type: object
+                    properties:
+                      __count:
+                        $ref: '#/components/schemas/count'
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/GWSAMPLE_BASIC.VH_BPRole'
+        4XX:
+          $ref: '#/components/responses/error'
+  '/VH_BPRoleSet(''{BpRole}'')':
+    parameters:
+      - name: BpRole
+        in: path
+        required: true
+        description: 'EPM: Business Partner Role'
+        schema:
+          type: string
+          maxLength: 3
+    get:
+      summary: Get entity from VH_BPRoleSet by key
+      tags:
+        - VH_BPRoleSet
+      parameters:
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - BpRole
+                - Shorttext
+      responses:
+        '200':
+          description: Retrieved entity
+          content:
+            application/json:
+              schema:
+                title: VH_BPRole
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/GWSAMPLE_BASIC.VH_BPRole'
+        4XX:
+          $ref: '#/components/responses/error'
+  /VH_LanguageSet:
+    get:
+      summary: Get entities from VH_LanguageSet
+      tags:
+        - VH_LanguageSet
+      parameters:
+        - name: $filter
+          in: query
+          description: >-
+            Filter items by property values, see
+            [Filtering](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=64)
+          schema:
+            type: string
+        - $ref: '#/components/parameters/count'
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - Spras
+                - Sptxt
+      responses:
+        '200':
+          description: Retrieved entities
+          content:
+            application/json:
+              schema:
+                title: Wrapper
+                type: object
+                properties:
+                  d:
+                    title: Collection of VH_Language
+                    type: object
+                    properties:
+                      __count:
+                        $ref: '#/components/schemas/count'
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/GWSAMPLE_BASIC.VH_Language'
+        4XX:
+          $ref: '#/components/responses/error'
+  '/VH_LanguageSet(''{Spras}'')':
+    parameters:
+      - name: Spras
+        in: path
+        required: true
+        description: |-
+          Language Key  
+          The language key indicates  
+          - the language in which texts are displayed,  
+          - the language in which you enter texts,  
+          - the language in which the system prints texts.
+        schema:
+          type: string
+          maxLength: 2
+    get:
+      summary: Get entity from VH_LanguageSet by key
+      tags:
+        - VH_LanguageSet
+      parameters:
+        - name: $select
+          in: query
+          description: >-
+            Select properties to be returned, see
+            [Select](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=68)
+          explode: false
+          schema:
+            type: array
+            uniqueItems: true
+            items:
+              type: string
+              enum:
+                - Spras
+                - Sptxt
+      responses:
+        '200':
+          description: Retrieved entity
+          content:
+            application/json:
+              schema:
+                title: VH_Language
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/GWSAMPLE_BASIC.VH_Language'
+        4XX:
+          $ref: '#/components/responses/error'
+  /RegenerateAllData:
+    post:
+      summary: Invoke action RegenerateAllData
+      tags:
+        - Service Operations
+      parameters:
+        - name: NoOfSalesOrders
+          in: query
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                title: CT_String
+                type: object
+                properties:
+                  d:
+                    type: object
+                    properties:
+                      RegenerateAllData:
+                        $ref: '#/components/schemas/GWSAMPLE_BASIC.CT_String'
+        4XX:
+          $ref: '#/components/responses/error'
+  /SalesOrder_Confirm:
+    post:
+      summary: Invoke action SalesOrder_Confirm
+      tags:
+        - SalesOrderSet
+      parameters:
+        - name: SalesOrderID
+          in: query
+          required: true
+          description: |-
+            Sa. Ord. ID  
+            (Value needs to be enclosed in single quotes)
+          schema:
+            type: string
+            maxLength: 12
+            pattern: '^''[^'']*(''''[^'']*)*''$'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                title: SalesOrder
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/GWSAMPLE_BASIC.SalesOrder'
+        4XX:
+          $ref: '#/components/responses/error'
+  /SalesOrder_Cancel:
+    post:
+      summary: Invoke action SalesOrder_Cancel
+      tags:
+        - SalesOrderSet
+      parameters:
+        - name: SalesOrderID
+          in: query
+          required: true
+          description: |-
+            Sa. Ord. ID  
+            (Value needs to be enclosed in single quotes)
+          schema:
+            type: string
+            maxLength: 12
+            pattern: '^''[^'']*(''''[^'']*)*''$'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                title: SalesOrder
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/GWSAMPLE_BASIC.SalesOrder'
+        4XX:
+          $ref: '#/components/responses/error'
+  /SalesOrder_InvoiceCreated:
+    post:
+      summary: Invoke action SalesOrder_InvoiceCreated
+      tags:
+        - SalesOrderSet
+      parameters:
+        - name: SalesOrderID
+          in: query
+          required: true
+          description: |-
+            Sa. Ord. ID  
+            (Value needs to be enclosed in single quotes)
+          schema:
+            type: string
+            maxLength: 12
+            pattern: '^''[^'']*(''''[^'']*)*''$'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                title: SalesOrder
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/GWSAMPLE_BASIC.SalesOrder'
+        4XX:
+          $ref: '#/components/responses/error'
+  /SalesOrder_GoodsIssueCreated:
+    post:
+      summary: Invoke action SalesOrder_GoodsIssueCreated
+      tags:
+        - SalesOrderSet
+      parameters:
+        - name: SalesOrderID
+          in: query
+          required: true
+          description: |-
+            Sa. Ord. ID  
+            (Value needs to be enclosed in single quotes)
+          schema:
+            type: string
+            maxLength: 12
+            pattern: '^''[^'']*(''''[^'']*)*''$'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                title: SalesOrder
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/GWSAMPLE_BASIC.SalesOrder'
+        4XX:
+          $ref: '#/components/responses/error'
+components:
+  schemas:
+    GWSAMPLE_BASIC.BusinessPartner:
+      type: object
+      properties:
+        Address:
+          $ref: '#/components/schemas/GWSAMPLE_BASIC.CT_Address'
+        BusinessPartnerID:
+          type: string
+          maxLength: 10
+          title: Bus. Part. ID
+          description: 'EPM: Business Partner ID'
+        CompanyName:
+          type: string
+          maxLength: 80
+          title: Company Name
+          description: 'EPM: Company Name'
+        WebAddress:
+          type: string
+          nullable: true
+          title: Web Address
+          description: 'SAP Gateway Sample Service: Web Address'
+        EmailAddress:
+          type: string
+          maxLength: 255
+          title: E-Mail Address
+          description: 'EPM: E-Mail Address'
+        PhoneNumber:
+          type: string
+          nullable: true
+          maxLength: 30
+          title: Phone No.
+          description: 'EPM: Phone Number'
+        FaxNumber:
+          type: string
+          nullable: true
+          maxLength: 30
+          title: Fax Number
+          description: 'SAP Gateway Sample Service: Fax Number'
+        LegalForm:
+          type: string
+          nullable: true
+          maxLength: 10
+          title: Legal Form
+          description: 'EPM: Legal Form of Business Partner'
+        CurrencyCode:
+          type: string
+          maxLength: 5
+          title: Currency
+          description: 'EPM: Currency Code'
+        BusinessPartnerRole:
+          type: string
+          maxLength: 3
+          title: Bus. Part. Role
+          description: 'EPM: Business Partner Role'
+        CreatedAt:
+          type: string
+          nullable: true
+          example: /Date(1492098664000)/
+          title: Time Stamp
+          description: >-
+            UTC Time Stamp in Long Form (YYYYMMDDhhmmssmmmuuun) The UTC
+            timestamp displays date and time according to UTC (Universal
+            Coordinated Time). In order to convert local time into a UTC time
+            stamp, which makes it easier to compare times, the local time must
+            be converted according to your time zone. The ABAP command convert
+            is available for this purpose. Even if the time zone that the
+            conversion is based on can be redetermined from Customizing or
+            master data, we still recommend that you save the time zone. The
+            internal structure of the high-resolution UTC time stamp is
+            logically organized in date and time sections in a packed decimal
+            format (YYYYMMDDhhmmssmmmuuun), which depicts the year, month, day,
+            hour,second, millisecond, microsecond and the first decimal of the
+            nanoseconds. Please note that the hardware that is normally used
+            does not fully support a resolution of 100 nanoseconds, which is
+            available in the structure. See also GET TIME STAMP A UTC time stamp
+            in short form is also available.
+        ChangedAt:
+          type: string
+          nullable: true
+          example: /Date(1492098664000)/
+          title: Time Stamp
+          description: >-
+            UTC Time Stamp in Long Form (YYYYMMDDhhmmssmmmuuun) The UTC
+            timestamp displays date and time according to UTC (Universal
+            Coordinated Time). In order to convert local time into a UTC time
+            stamp, which makes it easier to compare times, the local time must
+            be converted according to your time zone. The ABAP command convert
+            is available for this purpose. Even if the time zone that the
+            conversion is based on can be redetermined from Customizing or
+            master data, we still recommend that you save the time zone. The
+            internal structure of the high-resolution UTC time stamp is
+            logically organized in date and time sections in a packed decimal
+            format (YYYYMMDDhhmmssmmmuuun), which depicts the year, month, day,
+            hour,second, millisecond, microsecond and the first decimal of the
+            nanoseconds. Please note that the hardware that is normally used
+            does not fully support a resolution of 100 nanoseconds, which is
+            available in the structure. See also GET TIME STAMP A UTC time stamp
+            in short form is also available.
+        ToSalesOrders:
+          type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/GWSAMPLE_BASIC.SalesOrder'
+        ToContacts:
+          type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/GWSAMPLE_BASIC.Contact'
+        ToProducts:
+          type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/GWSAMPLE_BASIC.Product'
+      title: BusinessPartner
+    GWSAMPLE_BASIC.BusinessPartner-create:
+      type: object
+      properties:
+        Address:
+          $ref: '#/components/schemas/GWSAMPLE_BASIC.CT_Address-create'
+        CompanyName:
+          type: string
+          maxLength: 80
+          title: Company Name
+          description: 'EPM: Company Name'
+        WebAddress:
+          type: string
+          nullable: true
+          title: Web Address
+          description: 'SAP Gateway Sample Service: Web Address'
+        EmailAddress:
+          type: string
+          maxLength: 255
+          title: E-Mail Address
+          description: 'EPM: E-Mail Address'
+        PhoneNumber:
+          type: string
+          nullable: true
+          maxLength: 30
+          title: Phone No.
+          description: 'EPM: Phone Number'
+        FaxNumber:
+          type: string
+          nullable: true
+          maxLength: 30
+          title: Fax Number
+          description: 'SAP Gateway Sample Service: Fax Number'
+        LegalForm:
+          type: string
+          nullable: true
+          maxLength: 10
+          title: Legal Form
+          description: 'EPM: Legal Form of Business Partner'
+        CurrencyCode:
+          type: string
+          maxLength: 5
+          title: Currency
+          description: 'EPM: Currency Code'
+        BusinessPartnerRole:
+          type: string
+          maxLength: 3
+          title: Bus. Part. Role
+          description: 'EPM: Business Partner Role'
+        ToSalesOrders:
+          type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/GWSAMPLE_BASIC.SalesOrder-create'
+        ToContacts:
+          type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/GWSAMPLE_BASIC.Contact-create'
+        ToProducts:
+          type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/GWSAMPLE_BASIC.Product-create'
+      title: BusinessPartner (for create)
+    GWSAMPLE_BASIC.BusinessPartner-update:
+      type: object
+      properties:
+        Address:
+          $ref: '#/components/schemas/GWSAMPLE_BASIC.CT_Address-update'
+        CompanyName:
+          type: string
+          maxLength: 80
+          title: Company Name
+          description: 'EPM: Company Name'
+        WebAddress:
+          type: string
+          nullable: true
+          title: Web Address
+          description: 'SAP Gateway Sample Service: Web Address'
+        EmailAddress:
+          type: string
+          maxLength: 255
+          title: E-Mail Address
+          description: 'EPM: E-Mail Address'
+        PhoneNumber:
+          type: string
+          nullable: true
+          maxLength: 30
+          title: Phone No.
+          description: 'EPM: Phone Number'
+        FaxNumber:
+          type: string
+          nullable: true
+          maxLength: 30
+          title: Fax Number
+          description: 'SAP Gateway Sample Service: Fax Number'
+        LegalForm:
+          type: string
+          nullable: true
+          maxLength: 10
+          title: Legal Form
+          description: 'EPM: Legal Form of Business Partner'
+        CurrencyCode:
+          type: string
+          maxLength: 5
+          title: Currency
+          description: 'EPM: Currency Code'
+        BusinessPartnerRole:
+          type: string
+          maxLength: 3
+          title: Bus. Part. Role
+          description: 'EPM: Business Partner Role'
+      title: BusinessPartner (for update)
+    GWSAMPLE_BASIC.Product:
+      type: object
+      properties:
+        ProductID:
+          type: string
+          maxLength: 10
+          title: Product ID
+          description: 'EPM: Product ID'
+        TypeCode:
+          type: string
+          maxLength: 2
+          title: Prod. Type Code
+          description: 'EPM: Product Type Code'
+        Category:
+          type: string
+          maxLength: 40
+          title: Prod. Cat.
+          description: 'EPM: Product Category'
+        Name:
+          type: string
+          maxLength: 255
+          title: Product Name
+          description: 'SAP Gateway Sample Service: Product Name'
+        NameLanguage:
+          type: string
+          nullable: true
+          maxLength: 2
+          title: Language
+          description: >-
+            Language Key The language key indicates - the language in which
+            texts are displayed, - the language in which you enter texts, - the
+            language in which the system prints texts.
+        Description:
+          type: string
+          nullable: true
+          maxLength: 255
+          title: Prod.Descrip.
+          description: 'SAP Gateway Sample Service: Product Description'
+        DescriptionLanguage:
+          type: string
+          nullable: true
+          maxLength: 2
+          title: Language
+          description: >-
+            Language Key The language key indicates - the language in which
+            texts are displayed, - the language in which you enter texts, - the
+            language in which the system prints texts.
+        SupplierID:
+          type: string
+          maxLength: 10
+          title: Bus. Part. ID
+          description: 'EPM: Business Partner ID'
+        SupplierName:
+          type: string
+          nullable: true
+          maxLength: 80
+          title: Company Name
+          description: 'EPM: Company Name'
+        TaxTarifCode:
+          type: integer
+          format: uint8
+          title: Prod. Tax Code
+          description: 'EPM: Product Tax Tariff Code'
+        MeasureUnit:
+          type: string
+          maxLength: 3
+          title: Qty. Unit
+          description: 'EPM: Quantity Unit'
+        WeightMeasure:
+          type: string
+          nullable: true
+          format: decimal
+          multipleOf: 0.001
+          minimum: -9999999999.999
+          maximum: 9999999999.999
+          example: '0'
+          title: Wt. Measure
+          description: 'EPM: Weight Measure'
+        WeightUnit:
+          type: string
+          nullable: true
+          maxLength: 3
+          title: Qty. Unit
+          description: 'EPM: Weight Unit'
+        CurrencyCode:
+          type: string
+          maxLength: 5
+          title: Currency
+          description: 'EPM: Currency Code'
+        Price:
+          type: string
+          nullable: true
+          format: decimal
+          multipleOf: 0.001
+          example: '0'
+          title: Unit Price
+          description: 'EPM: Product Unit Price'
+        Width:
+          type: string
+          nullable: true
+          format: decimal
+          multipleOf: 0.001
+          minimum: -9999999999.999
+          maximum: 9999999999.999
+          example: '0'
+          title: Dimensions
+          description: 'EPM: Dimension'
+        Depth:
+          type: string
+          nullable: true
+          format: decimal
+          multipleOf: 0.001
+          minimum: -9999999999.999
+          maximum: 9999999999.999
+          example: '0'
+          title: Dimensions
+          description: 'EPM: Dimension'
+        Height:
+          type: string
+          nullable: true
+          format: decimal
+          multipleOf: 0.001
+          minimum: -9999999999.999
+          maximum: 9999999999.999
+          example: '0'
+          title: Dimensions
+          description: 'EPM: Dimension'
+        DimUnit:
+          type: string
+          nullable: true
+          maxLength: 3
+          title: Dim. Unit
+          description: 'EPM: Dimension Unit'
+        CreatedAt:
+          type: string
+          nullable: true
+          example: /Date(1492098664000)/
+          title: Time Stamp
+          description: >-
+            UTC Time Stamp in Long Form (YYYYMMDDhhmmssmmmuuun) The UTC
+            timestamp displays date and time according to UTC (Universal
+            Coordinated Time). In order to convert local time into a UTC time
+            stamp, which makes it easier to compare times, the local time must
+            be converted according to your time zone. The ABAP command convert
+            is available for this purpose. Even if the time zone that the
+            conversion is based on can be redetermined from Customizing or
+            master data, we still recommend that you save the time zone. The
+            internal structure of the high-resolution UTC time stamp is
+            logically organized in date and time sections in a packed decimal
+            format (YYYYMMDDhhmmssmmmuuun), which depicts the year, month, day,
+            hour,second, millisecond, microsecond and the first decimal of the
+            nanoseconds. Please note that the hardware that is normally used
+            does not fully support a resolution of 100 nanoseconds, which is
+            available in the structure. See also GET TIME STAMP A UTC time stamp
+            in short form is also available.
+        ChangedAt:
+          type: string
+          nullable: true
+          example: /Date(1492098664000)/
+          title: Time Stamp
+          description: >-
+            UTC Time Stamp in Long Form (YYYYMMDDhhmmssmmmuuun) The UTC
+            timestamp displays date and time according to UTC (Universal
+            Coordinated Time). In order to convert local time into a UTC time
+            stamp, which makes it easier to compare times, the local time must
+            be converted according to your time zone. The ABAP command convert
+            is available for this purpose. Even if the time zone that the
+            conversion is based on can be redetermined from Customizing or
+            master data, we still recommend that you save the time zone. The
+            internal structure of the high-resolution UTC time stamp is
+            logically organized in date and time sections in a packed decimal
+            format (YYYYMMDDhhmmssmmmuuun), which depicts the year, month, day,
+            hour,second, millisecond, microsecond and the first decimal of the
+            nanoseconds. Please note that the hardware that is normally used
+            does not fully support a resolution of 100 nanoseconds, which is
+            available in the structure. See also GET TIME STAMP A UTC time stamp
+            in short form is also available.
+        ToSupplier:
+          $ref: '#/components/schemas/GWSAMPLE_BASIC.BusinessPartner'
+        ToSalesOrderLineItems:
+          type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/GWSAMPLE_BASIC.SalesOrderLineItem'
+      title: Product
+    GWSAMPLE_BASIC.Product-create:
+      type: object
+      properties:
+        ProductID:
+          type: string
+          maxLength: 10
+          title: Product ID
+          description: 'EPM: Product ID'
+        TypeCode:
+          type: string
+          maxLength: 2
+          title: Prod. Type Code
+          description: 'EPM: Product Type Code'
+        Category:
+          type: string
+          maxLength: 40
+          title: Prod. Cat.
+          description: 'EPM: Product Category'
+        Name:
+          type: string
+          maxLength: 255
+          title: Product Name
+          description: 'SAP Gateway Sample Service: Product Name'
+        Description:
+          type: string
+          nullable: true
+          maxLength: 255
+          title: Prod.Descrip.
+          description: 'SAP Gateway Sample Service: Product Description'
+        SupplierID:
+          type: string
+          maxLength: 10
+          title: Bus. Part. ID
+          description: 'EPM: Business Partner ID'
+        TaxTarifCode:
+          type: integer
+          format: uint8
+          title: Prod. Tax Code
+          description: 'EPM: Product Tax Tariff Code'
+        MeasureUnit:
+          type: string
+          maxLength: 3
+          title: Qty. Unit
+          description: 'EPM: Quantity Unit'
+        WeightMeasure:
+          type: string
+          nullable: true
+          format: decimal
+          multipleOf: 0.001
+          minimum: -9999999999.999
+          maximum: 9999999999.999
+          example: '0'
+          title: Wt. Measure
+          description: 'EPM: Weight Measure'
+        WeightUnit:
+          type: string
+          nullable: true
+          maxLength: 3
+          title: Qty. Unit
+          description: 'EPM: Weight Unit'
+        CurrencyCode:
+          type: string
+          maxLength: 5
+          title: Currency
+          description: 'EPM: Currency Code'
+        Price:
+          type: string
+          nullable: true
+          format: decimal
+          multipleOf: 0.001
+          example: '0'
+          title: Unit Price
+          description: 'EPM: Product Unit Price'
+        Width:
+          type: string
+          nullable: true
+          format: decimal
+          multipleOf: 0.001
+          minimum: -9999999999.999
+          maximum: 9999999999.999
+          example: '0'
+          title: Dimensions
+          description: 'EPM: Dimension'
+        Depth:
+          type: string
+          nullable: true
+          format: decimal
+          multipleOf: 0.001
+          minimum: -9999999999.999
+          maximum: 9999999999.999
+          example: '0'
+          title: Dimensions
+          description: 'EPM: Dimension'
+        Height:
+          type: string
+          nullable: true
+          format: decimal
+          multipleOf: 0.001
+          minimum: -9999999999.999
+          maximum: 9999999999.999
+          example: '0'
+          title: Dimensions
+          description: 'EPM: Dimension'
+        DimUnit:
+          type: string
+          nullable: true
+          maxLength: 3
+          title: Dim. Unit
+          description: 'EPM: Dimension Unit'
+        ToSupplier:
+          $ref: '#/components/schemas/GWSAMPLE_BASIC.BusinessPartner-create'
+        ToSalesOrderLineItems:
+          type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/GWSAMPLE_BASIC.SalesOrderLineItem-create'
+      required:
+        - ProductID
+      title: Product (for create)
+    GWSAMPLE_BASIC.Product-update:
+      type: object
+      properties:
+        TypeCode:
+          type: string
+          maxLength: 2
+          title: Prod. Type Code
+          description: 'EPM: Product Type Code'
+        Category:
+          type: string
+          maxLength: 40
+          title: Prod. Cat.
+          description: 'EPM: Product Category'
+        Name:
+          type: string
+          maxLength: 255
+          title: Product Name
+          description: 'SAP Gateway Sample Service: Product Name'
+        Description:
+          type: string
+          nullable: true
+          maxLength: 255
+          title: Prod.Descrip.
+          description: 'SAP Gateway Sample Service: Product Description'
+        SupplierID:
+          type: string
+          maxLength: 10
+          title: Bus. Part. ID
+          description: 'EPM: Business Partner ID'
+        TaxTarifCode:
+          type: integer
+          format: uint8
+          title: Prod. Tax Code
+          description: 'EPM: Product Tax Tariff Code'
+        MeasureUnit:
+          type: string
+          maxLength: 3
+          title: Qty. Unit
+          description: 'EPM: Quantity Unit'
+        WeightMeasure:
+          type: string
+          nullable: true
+          format: decimal
+          multipleOf: 0.001
+          minimum: -9999999999.999
+          maximum: 9999999999.999
+          example: '0'
+          title: Wt. Measure
+          description: 'EPM: Weight Measure'
+        WeightUnit:
+          type: string
+          nullable: true
+          maxLength: 3
+          title: Qty. Unit
+          description: 'EPM: Weight Unit'
+        CurrencyCode:
+          type: string
+          maxLength: 5
+          title: Currency
+          description: 'EPM: Currency Code'
+        Price:
+          type: string
+          nullable: true
+          format: decimal
+          multipleOf: 0.001
+          example: '0'
+          title: Unit Price
+          description: 'EPM: Product Unit Price'
+        Width:
+          type: string
+          nullable: true
+          format: decimal
+          multipleOf: 0.001
+          minimum: -9999999999.999
+          maximum: 9999999999.999
+          example: '0'
+          title: Dimensions
+          description: 'EPM: Dimension'
+        Depth:
+          type: string
+          nullable: true
+          format: decimal
+          multipleOf: 0.001
+          minimum: -9999999999.999
+          maximum: 9999999999.999
+          example: '0'
+          title: Dimensions
+          description: 'EPM: Dimension'
+        Height:
+          type: string
+          nullable: true
+          format: decimal
+          multipleOf: 0.001
+          minimum: -9999999999.999
+          maximum: 9999999999.999
+          example: '0'
+          title: Dimensions
+          description: 'EPM: Dimension'
+        DimUnit:
+          type: string
+          nullable: true
+          maxLength: 3
+          title: Dim. Unit
+          description: 'EPM: Dimension Unit'
+      title: Product (for update)
+    GWSAMPLE_BASIC.SalesOrder:
+      type: object
+      properties:
+        SalesOrderID:
+          type: string
+          maxLength: 10
+          title: Sa. Ord. ID
+          description: 'EPM: Sales Order Number'
+        Note:
+          type: string
+          nullable: true
+          maxLength: 255
+          title: Description
+          description: 'EPM: Text field for names and descriptions'
+        NoteLanguage:
+          type: string
+          nullable: true
+          maxLength: 2
+          title: Language
+          description: >-
+            Language Key The language key indicates - the language in which
+            texts are displayed, - the language in which you enter texts, - the
+            language in which the system prints texts.
+        CustomerID:
+          type: string
+          maxLength: 10
+          title: Bus. Part. ID
+          description: 'EPM: Business Partner ID'
+        CustomerName:
+          type: string
+          nullable: true
+          maxLength: 80
+          title: Company Name
+          description: 'EPM: Company Name'
+        CurrencyCode:
+          type: string
+          nullable: true
+          maxLength: 5
+          title: Currency
+          description: 'EPM: Currency Code'
+        GrossAmount:
+          type: string
+          nullable: true
+          format: decimal
+          multipleOf: 0.001
+          example: '0'
+          title: Gross Amt.
+          description: 'EPM: Total Gross Amount'
+        NetAmount:
+          type: string
+          nullable: true
+          format: decimal
+          multipleOf: 0.001
+          example: '0'
+          title: Net Amt.
+          description: 'EPM: Total Net Amount'
+        TaxAmount:
+          type: string
+          nullable: true
+          format: decimal
+          multipleOf: 0.001
+          example: '0'
+          title: Tax Amt.
+          description: 'EPM: Total Tax Amount'
+        LifecycleStatus:
+          type: string
+          nullable: true
+          maxLength: 1
+          title: PO Lifecycle
+          description: 'EPM: Sales Order Lifecycle Status'
+        LifecycleStatusDescription:
+          type: string
+          nullable: true
+          maxLength: 60
+          title: Lifecycle Descript.
+          description: 'SAP Gateway Sample Service: Lifecycle Status Description'
+        BillingStatus:
+          type: string
+          nullable: true
+          maxLength: 1
+          title: PO Confirmation
+          description: 'EPM: Sales Order Confirmation Status'
+        BillingStatusDescription:
+          type: string
+          nullable: true
+          maxLength: 60
+          title: Billing Description
+          description: 'SAP Gateway Sample Service: Billing Status Description'
+        DeliveryStatus:
+          type: string
+          nullable: true
+          maxLength: 1
+          title: PO Ordering
+          description: 'EPM: Sales Order Ordering Status'
+        DeliveryStatusDescription:
+          type: string
+          nullable: true
+          maxLength: 60
+          title: Delivery Description
+          description: 'SAP Gateway Sample Service: Delivery Status Description'
+        CreatedAt:
+          type: string
+          nullable: true
+          example: /Date(1492098664000)/
+          title: Time Stamp
+          description: >-
+            UTC Time Stamp in Long Form (YYYYMMDDhhmmssmmmuuun) The UTC
+            timestamp displays date and time according to UTC (Universal
+            Coordinated Time). In order to convert local time into a UTC time
+            stamp, which makes it easier to compare times, the local time must
+            be converted according to your time zone. The ABAP command convert
+            is available for this purpose. Even if the time zone that the
+            conversion is based on can be redetermined from Customizing or
+            master data, we still recommend that you save the time zone. The
+            internal structure of the high-resolution UTC time stamp is
+            logically organized in date and time sections in a packed decimal
+            format (YYYYMMDDhhmmssmmmuuun), which depicts the year, month, day,
+            hour,second, millisecond, microsecond and the first decimal of the
+            nanoseconds. Please note that the hardware that is normally used
+            does not fully support a resolution of 100 nanoseconds, which is
+            available in the structure. See also GET TIME STAMP A UTC time stamp
+            in short form is also available.
+        ChangedAt:
+          type: string
+          nullable: true
+          example: /Date(1492098664000)/
+          title: Time Stamp
+          description: >-
+            UTC Time Stamp in Long Form (YYYYMMDDhhmmssmmmuuun) The UTC
+            timestamp displays date and time according to UTC (Universal
+            Coordinated Time). In order to convert local time into a UTC time
+            stamp, which makes it easier to compare times, the local time must
+            be converted according to your time zone. The ABAP command convert
+            is available for this purpose. Even if the time zone that the
+            conversion is based on can be redetermined from Customizing or
+            master data, we still recommend that you save the time zone. The
+            internal structure of the high-resolution UTC time stamp is
+            logically organized in date and time sections in a packed decimal
+            format (YYYYMMDDhhmmssmmmuuun), which depicts the year, month, day,
+            hour,second, millisecond, microsecond and the first decimal of the
+            nanoseconds. Please note that the hardware that is normally used
+            does not fully support a resolution of 100 nanoseconds, which is
+            available in the structure. See also GET TIME STAMP A UTC time stamp
+            in short form is also available.
+        ToBusinessPartner:
+          $ref: '#/components/schemas/GWSAMPLE_BASIC.BusinessPartner'
+        ToLineItems:
+          type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/GWSAMPLE_BASIC.SalesOrderLineItem'
+      title: SalesOrder
+    GWSAMPLE_BASIC.SalesOrder-create:
+      type: object
+      properties:
+        Note:
+          type: string
+          nullable: true
+          maxLength: 255
+          title: Description
+          description: 'EPM: Text field for names and descriptions'
+        CustomerID:
+          type: string
+          maxLength: 10
+          title: Bus. Part. ID
+          description: 'EPM: Business Partner ID'
+        CurrencyCode:
+          type: string
+          nullable: true
+          maxLength: 5
+          title: Currency
+          description: 'EPM: Currency Code'
+        ToBusinessPartner:
+          $ref: '#/components/schemas/GWSAMPLE_BASIC.BusinessPartner-create'
+        ToLineItems:
+          type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/GWSAMPLE_BASIC.SalesOrderLineItem-create'
+      title: SalesOrder (for create)
+    GWSAMPLE_BASIC.SalesOrder-update:
+      type: object
+      title: SalesOrder (for update)
+    GWSAMPLE_BASIC.SalesOrderLineItem:
+      type: object
+      properties:
+        SalesOrderID:
+          type: string
+          maxLength: 10
+          title: Sa. Ord. ID
+          description: 'EPM: Sales Order Number'
+        ItemPosition:
+          type: string
+          maxLength: 10
+          title: PO Item Pos
+          description: 'EPM: Sales Order Item Position'
+        ProductID:
+          type: string
+          maxLength: 10
+          title: Product ID
+          description: 'EPM: Product ID'
+        Note:
+          type: string
+          nullable: true
+          maxLength: 255
+          title: Description
+          description: 'EPM: Text field for names and descriptions'
+        NoteLanguage:
+          type: string
+          nullable: true
+          maxLength: 2
+          title: Language
+          description: >-
+            Language Key The language key indicates - the language in which
+            texts are displayed, - the language in which you enter texts, - the
+            language in which the system prints texts.
+        CurrencyCode:
+          type: string
+          nullable: true
+          maxLength: 5
+          title: Currency
+          description: 'EPM: Currency Code'
+        GrossAmount:
+          type: string
+          nullable: true
+          format: decimal
+          multipleOf: 0.001
+          example: '0'
+          title: Gross Amt.
+          description: 'EPM: Total Gross Amount'
+        NetAmount:
+          type: string
+          nullable: true
+          format: decimal
+          multipleOf: 0.001
+          example: '0'
+          title: Net Amt.
+          description: 'EPM: Total Net Amount'
+        TaxAmount:
+          type: string
+          nullable: true
+          format: decimal
+          multipleOf: 0.001
+          example: '0'
+          title: Tax Amt.
+          description: 'EPM: Total Tax Amount'
+        DeliveryDate:
+          type: string
+          example: /Date(1492098664000)/
+          title: Time Stamp
+          description: >-
+            UTC Time Stamp in Long Form (YYYYMMDDhhmmssmmmuuun) The UTC
+            timestamp displays date and time according to UTC (Universal
+            Coordinated Time). In order to convert local time into a UTC time
+            stamp, which makes it easier to compare times, the local time must
+            be converted according to your time zone. The ABAP command convert
+            is available for this purpose. Even if the time zone that the
+            conversion is based on can be redetermined from Customizing or
+            master data, we still recommend that you save the time zone. The
+            internal structure of the high-resolution UTC time stamp is
+            logically organized in date and time sections in a packed decimal
+            format (YYYYMMDDhhmmssmmmuuun), which depicts the year, month, day,
+            hour,second, millisecond, microsecond and the first decimal of the
+            nanoseconds. Please note that the hardware that is normally used
+            does not fully support a resolution of 100 nanoseconds, which is
+            available in the structure. See also GET TIME STAMP A UTC time stamp
+            in short form is also available.
+        Quantity:
+          type: string
+          format: decimal
+          multipleOf: 0.001
+          minimum: -9999999999.999
+          maximum: 9999999999.999
+          example: '0'
+          title: Quantity
+          description: 'EPM: Quantity'
+        QuantityUnit:
+          type: string
+          nullable: true
+          maxLength: 3
+          title: Qty. Unit
+          description: 'EPM: Quantity Unit'
+        ToHeader:
+          $ref: '#/components/schemas/GWSAMPLE_BASIC.SalesOrder'
+        ToProduct:
+          $ref: '#/components/schemas/GWSAMPLE_BASIC.Product'
+      title: SalesOrderLineItem
+    GWSAMPLE_BASIC.SalesOrderLineItem-create:
+      type: object
+      properties:
+        SalesOrderID:
+          type: string
+          maxLength: 10
+          title: Sa. Ord. ID
+          description: 'EPM: Sales Order Number'
+        ProductID:
+          type: string
+          maxLength: 10
+          title: Product ID
+          description: 'EPM: Product ID'
+        Note:
+          type: string
+          nullable: true
+          maxLength: 255
+          title: Description
+          description: 'EPM: Text field for names and descriptions'
+        DeliveryDate:
+          type: string
+          example: /Date(1492098664000)/
+          title: Time Stamp
+          description: >-
+            UTC Time Stamp in Long Form (YYYYMMDDhhmmssmmmuuun) The UTC
+            timestamp displays date and time according to UTC (Universal
+            Coordinated Time). In order to convert local time into a UTC time
+            stamp, which makes it easier to compare times, the local time must
+            be converted according to your time zone. The ABAP command convert
+            is available for this purpose. Even if the time zone that the
+            conversion is based on can be redetermined from Customizing or
+            master data, we still recommend that you save the time zone. The
+            internal structure of the high-resolution UTC time stamp is
+            logically organized in date and time sections in a packed decimal
+            format (YYYYMMDDhhmmssmmmuuun), which depicts the year, month, day,
+            hour,second, millisecond, microsecond and the first decimal of the
+            nanoseconds. Please note that the hardware that is normally used
+            does not fully support a resolution of 100 nanoseconds, which is
+            available in the structure. See also GET TIME STAMP A UTC time stamp
+            in short form is also available.
+        Quantity:
+          type: string
+          format: decimal
+          multipleOf: 0.001
+          minimum: -9999999999.999
+          maximum: 9999999999.999
+          example: '0'
+          title: Quantity
+          description: 'EPM: Quantity'
+        ToHeader:
+          $ref: '#/components/schemas/GWSAMPLE_BASIC.SalesOrder-create'
+        ToProduct:
+          $ref: '#/components/schemas/GWSAMPLE_BASIC.Product-create'
+      required:
+        - SalesOrderID
+      title: SalesOrderLineItem (for create)
+    GWSAMPLE_BASIC.SalesOrderLineItem-update:
+      type: object
+      properties:
+        ProductID:
+          type: string
+          maxLength: 10
+          title: Product ID
+          description: 'EPM: Product ID'
+        Note:
+          type: string
+          nullable: true
+          maxLength: 255
+          title: Description
+          description: 'EPM: Text field for names and descriptions'
+        DeliveryDate:
+          type: string
+          example: /Date(1492098664000)/
+          title: Time Stamp
+          description: >-
+            UTC Time Stamp in Long Form (YYYYMMDDhhmmssmmmuuun) The UTC
+            timestamp displays date and time according to UTC (Universal
+            Coordinated Time). In order to convert local time into a UTC time
+            stamp, which makes it easier to compare times, the local time must
+            be converted according to your time zone. The ABAP command convert
+            is available for this purpose. Even if the time zone that the
+            conversion is based on can be redetermined from Customizing or
+            master data, we still recommend that you save the time zone. The
+            internal structure of the high-resolution UTC time stamp is
+            logically organized in date and time sections in a packed decimal
+            format (YYYYMMDDhhmmssmmmuuun), which depicts the year, month, day,
+            hour,second, millisecond, microsecond and the first decimal of the
+            nanoseconds. Please note that the hardware that is normally used
+            does not fully support a resolution of 100 nanoseconds, which is
+            available in the structure. See also GET TIME STAMP A UTC time stamp
+            in short form is also available.
+        Quantity:
+          type: string
+          format: decimal
+          multipleOf: 0.001
+          minimum: -9999999999.999
+          maximum: 9999999999.999
+          example: '0'
+          title: Quantity
+          description: 'EPM: Quantity'
+      title: SalesOrderLineItem (for update)
+    GWSAMPLE_BASIC.Contact:
+      type: object
+      properties:
+        Address:
+          $ref: '#/components/schemas/GWSAMPLE_BASIC.CT_Address'
+        ContactGuid:
+          type: string
+          format: uuid
+          example: 01234567-89ab-cdef-0123-456789abcdef
+          title: Contact GUID
+          description: 'SAP Gateway Sample Service: Contact GUID'
+        BusinessPartnerID:
+          type: string
+          maxLength: 10
+          title: Bus. Part. ID
+          description: 'EPM: Business Partner ID'
+        Title:
+          type: string
+          nullable: true
+          maxLength: 10
+          title: Title
+          description: 'EPM: Title'
+        FirstName:
+          type: string
+          maxLength: 40
+          title: First Name
+          description: 'EPM: First Name'
+        MiddleName:
+          type: string
+          nullable: true
+          maxLength: 40
+          title: Middle Name
+          description: 'EPM: Middle Name'
+        LastName:
+          type: string
+          nullable: true
+          maxLength: 40
+          title: Last Name
+          description: 'EPM: Last Name'
+        Nickname:
+          type: string
+          nullable: true
+          maxLength: 40
+          title: Nickname
+          description: 'EPM: Nickname'
+        Initials:
+          type: string
+          nullable: true
+          maxLength: 10
+          title: Initials
+          description: 'EPM: Initials'
+        Sex:
+          type: string
+          maxLength: 1
+          title: Sex
+          description: 'EPM: Gender'
+        PhoneNumber:
+          type: string
+          nullable: true
+          maxLength: 30
+          title: Phone No.
+          description: 'EPM: Phone Number'
+        FaxNumber:
+          type: string
+          nullable: true
+          maxLength: 30
+          title: Fax Number
+          description: 'SAP Gateway Sample Service: Fax Number'
+        EmailAddress:
+          type: string
+          nullable: true
+          maxLength: 255
+          title: E-Mail Address
+          description: 'EPM: E-Mail Address'
+        Language:
+          type: string
+          nullable: true
+          maxLength: 2
+          title: Language Key
+          description: 'SAP Gateway Sample Service: Language Key'
+        DateOfBirth:
+          type: string
+          nullable: true
+          example: /Date(1492098664000)/
+          title: Date of Birth
+          description: 'SAP Gateway Sample Service: Date of Birth'
+        ToBusinessPartner:
+          $ref: '#/components/schemas/GWSAMPLE_BASIC.BusinessPartner'
+      title: Contact
+    GWSAMPLE_BASIC.Contact-create:
+      type: object
+      properties:
+        Address:
+          $ref: '#/components/schemas/GWSAMPLE_BASIC.CT_Address-create'
+        BusinessPartnerID:
+          type: string
+          maxLength: 10
+          title: Bus. Part. ID
+          description: 'EPM: Business Partner ID'
+        Title:
+          type: string
+          nullable: true
+          maxLength: 10
+          title: Title
+          description: 'EPM: Title'
+        FirstName:
+          type: string
+          maxLength: 40
+          title: First Name
+          description: 'EPM: First Name'
+        MiddleName:
+          type: string
+          nullable: true
+          maxLength: 40
+          title: Middle Name
+          description: 'EPM: Middle Name'
+        LastName:
+          type: string
+          nullable: true
+          maxLength: 40
+          title: Last Name
+          description: 'EPM: Last Name'
+        Nickname:
+          type: string
+          nullable: true
+          maxLength: 40
+          title: Nickname
+          description: 'EPM: Nickname'
+        Initials:
+          type: string
+          nullable: true
+          maxLength: 10
+          title: Initials
+          description: 'EPM: Initials'
+        Sex:
+          type: string
+          maxLength: 1
+          title: Sex
+          description: 'EPM: Gender'
+        PhoneNumber:
+          type: string
+          nullable: true
+          maxLength: 30
+          title: Phone No.
+          description: 'EPM: Phone Number'
+        FaxNumber:
+          type: string
+          nullable: true
+          maxLength: 30
+          title: Fax Number
+          description: 'SAP Gateway Sample Service: Fax Number'
+        EmailAddress:
+          type: string
+          nullable: true
+          maxLength: 255
+          title: E-Mail Address
+          description: 'EPM: E-Mail Address'
+        Language:
+          type: string
+          nullable: true
+          maxLength: 2
+          title: Language Key
+          description: 'SAP Gateway Sample Service: Language Key'
+        DateOfBirth:
+          type: string
+          nullable: true
+          example: /Date(1492098664000)/
+          title: Date of Birth
+          description: 'SAP Gateway Sample Service: Date of Birth'
+        ToBusinessPartner:
+          $ref: '#/components/schemas/GWSAMPLE_BASIC.BusinessPartner-create'
+      title: Contact (for create)
+    GWSAMPLE_BASIC.Contact-update:
+      type: object
+      properties:
+        Address:
+          $ref: '#/components/schemas/GWSAMPLE_BASIC.CT_Address-update'
+        Title:
+          type: string
+          nullable: true
+          maxLength: 10
+          title: Title
+          description: 'EPM: Title'
+        FirstName:
+          type: string
+          maxLength: 40
+          title: First Name
+          description: 'EPM: First Name'
+        MiddleName:
+          type: string
+          nullable: true
+          maxLength: 40
+          title: Middle Name
+          description: 'EPM: Middle Name'
+        LastName:
+          type: string
+          nullable: true
+          maxLength: 40
+          title: Last Name
+          description: 'EPM: Last Name'
+        Nickname:
+          type: string
+          nullable: true
+          maxLength: 40
+          title: Nickname
+          description: 'EPM: Nickname'
+        Initials:
+          type: string
+          nullable: true
+          maxLength: 10
+          title: Initials
+          description: 'EPM: Initials'
+        Sex:
+          type: string
+          maxLength: 1
+          title: Sex
+          description: 'EPM: Gender'
+        PhoneNumber:
+          type: string
+          nullable: true
+          maxLength: 30
+          title: Phone No.
+          description: 'EPM: Phone Number'
+        FaxNumber:
+          type: string
+          nullable: true
+          maxLength: 30
+          title: Fax Number
+          description: 'SAP Gateway Sample Service: Fax Number'
+        EmailAddress:
+          type: string
+          nullable: true
+          maxLength: 255
+          title: E-Mail Address
+          description: 'EPM: E-Mail Address'
+        Language:
+          type: string
+          nullable: true
+          maxLength: 2
+          title: Language Key
+          description: 'SAP Gateway Sample Service: Language Key'
+        DateOfBirth:
+          type: string
+          nullable: true
+          example: /Date(1492098664000)/
+          title: Date of Birth
+          description: 'SAP Gateway Sample Service: Date of Birth'
+      title: Contact (for update)
+    GWSAMPLE_BASIC.VH_Sex:
+      type: object
+      properties:
+        Sex:
+          type: string
+          maxLength: 1
+          title: Sex
+          description: 'EPM: Gender'
+        Shorttext:
+          type: string
+          maxLength: 60
+          title: Short Descript.
+          description: >-
+            Short Text for Fixed Values This text appears when fixed values are
+            displayed in the F4 help. It explains the possible input values. See
+            Task-Oriented Instructions Reference Documentation for Semantic
+            Properties of Domains
+      title: VH_Sex
+    GWSAMPLE_BASIC.VH_Sex-create:
+      type: object
+      title: VH_Sex (for create)
+    GWSAMPLE_BASIC.VH_Sex-update:
+      type: object
+      title: VH_Sex (for update)
+    GWSAMPLE_BASIC.VH_Country:
+      type: object
+      properties:
+        Land1:
+          type: string
+          maxLength: 3
+          title: Country
+          description: >-
+            Country/Region Key The country/region key contains information which
+            the system uses to check entries such as the length of the postal
+            code or bank account number. The two-character ISO code in
+            accordance with ISO 3166, which is delivered by SAP as a default, is
+            usually used. It could also be the vehicle license plate
+            country/region code or a typical country/region key, for example, in
+            Germany the Federal statistics office key. The country/region keys
+            are determined at system installation in the global settings. The
+            definition of the country/region keys in the SAP system does not
+            necessarily have to match political or state units. Since the
+            country/region key does not have to correspond to the ISO code in
+            all installations, programs that differ according to certain values
+            of the country/region key cannot query the country/region key
+            T005-LAND1, but have to program based on the ISO code T005 INTCA.
+        Landx:
+          type: string
+          maxLength: 15
+          title: Name
+          description: Name of Country/Region (Short)
+        Natio:
+          type: string
+          maxLength: 15
+          title: Nationality
+      title: VH_Country
+    GWSAMPLE_BASIC.VH_Country-create:
+      type: object
+      title: VH_Country (for create)
+    GWSAMPLE_BASIC.VH_Country-update:
+      type: object
+      title: VH_Country (for update)
+    GWSAMPLE_BASIC.VH_AddressType:
+      type: object
+      properties:
+        AddressType:
+          type: string
+          maxLength: 2
+          title: Address Type
+          description: 'EPM: Address Type'
+        Shorttext:
+          type: string
+          maxLength: 60
+          title: Short Descript.
+          description: >-
+            Short Text for Fixed Values This text appears when fixed values are
+            displayed in the F4 help. It explains the possible input values. See
+            Task-Oriented Instructions Reference Documentation for Semantic
+            Properties of Domains
+      title: VH_AddressType
+    GWSAMPLE_BASIC.VH_AddressType-create:
+      type: object
+      title: VH_AddressType (for create)
+    GWSAMPLE_BASIC.VH_AddressType-update:
+      type: object
+      title: VH_AddressType (for update)
+    GWSAMPLE_BASIC.VH_Category:
+      type: object
+      properties:
+        Category:
+          type: string
+          maxLength: 40
+          title: Prod. Cat.
+          description: 'EPM: Product Category'
+      title: VH_Category
+    GWSAMPLE_BASIC.VH_Category-create:
+      type: object
+      title: VH_Category (for create)
+    GWSAMPLE_BASIC.VH_Category-update:
+      type: object
+      title: VH_Category (for update)
+    GWSAMPLE_BASIC.VH_Currency:
+      type: object
+      properties:
+        Waers:
+          type: string
+          maxLength: 5
+          title: Currency
+          description: >-
+            Currency Key Key for the currency in which the amounts are managed
+            in the system.
+        Ltext:
+          type: string
+          maxLength: 40
+          title: Long Text
+          description: >-
+            A text that describes the object to which it refers in greater
+            detail.
+      title: VH_Currency
+    GWSAMPLE_BASIC.VH_Currency-create:
+      type: object
+      title: VH_Currency (for create)
+    GWSAMPLE_BASIC.VH_Currency-update:
+      type: object
+      title: VH_Currency (for update)
+    GWSAMPLE_BASIC.VH_UnitQuantity:
+      type: object
+      properties:
+        Msehi:
+          type: string
+          maxLength: 3
+          title: Int. meas. unit
+          description: >-
+            Unit of Measurement Internal, language-independent, measurement unit
+            format. This format is used for internal processing. The internal
+            format is automatically replaced by either the external commercial
+            (three-character) or technical (six-character) format before output
+            to the screen.
+        Msehl:
+          type: string
+          maxLength: 30
+          title: Unit text
+          description: >-
+            Unit of Measurement Text (Maximum 30 Characters) Name of unit of
+            measurement.
+      title: VH_UnitQuantity
+    GWSAMPLE_BASIC.VH_UnitQuantity-create:
+      type: object
+      title: VH_UnitQuantity (for create)
+    GWSAMPLE_BASIC.VH_UnitQuantity-update:
+      type: object
+      title: VH_UnitQuantity (for update)
+    GWSAMPLE_BASIC.VH_UnitWeight:
+      type: object
+      properties:
+        Msehi:
+          type: string
+          maxLength: 3
+          title: Int. meas. unit
+          description: >-
+            Unit of Measurement Internal, language-independent, measurement unit
+            format. This format is used for internal processing. The internal
+            format is automatically replaced by either the external commercial
+            (three-character) or technical (six-character) format before output
+            to the screen.
+        Msehl:
+          type: string
+          maxLength: 30
+          title: Unit text
+          description: >-
+            Unit of Measurement Text (Maximum 30 Characters) Name of unit of
+            measurement.
+      title: VH_UnitWeight
+    GWSAMPLE_BASIC.VH_UnitWeight-create:
+      type: object
+      title: VH_UnitWeight (for create)
+    GWSAMPLE_BASIC.VH_UnitWeight-update:
+      type: object
+      title: VH_UnitWeight (for update)
+    GWSAMPLE_BASIC.VH_UnitLength:
+      type: object
+      properties:
+        Msehi:
+          type: string
+          maxLength: 3
+          title: Int. meas. unit
+          description: >-
+            Unit of Measurement Internal, language-independent, measurement unit
+            format. This format is used for internal processing. The internal
+            format is automatically replaced by either the external commercial
+            (three-character) or technical (six-character) format before output
+            to the screen.
+        Msehl:
+          type: string
+          maxLength: 30
+          title: Unit text
+          description: >-
+            Unit of Measurement Text (Maximum 30 Characters) Name of unit of
+            measurement.
+      title: VH_UnitLength
+    GWSAMPLE_BASIC.VH_UnitLength-create:
+      type: object
+      title: VH_UnitLength (for create)
+    GWSAMPLE_BASIC.VH_UnitLength-update:
+      type: object
+      title: VH_UnitLength (for update)
+    GWSAMPLE_BASIC.VH_ProductTypeCode:
+      type: object
+      properties:
+        TypeCode:
+          type: string
+          maxLength: 2
+          title: Prod. Type Code
+          description: 'EPM: Product Type Code'
+        Shorttext:
+          type: string
+          maxLength: 60
+          title: Short Descript.
+          description: >-
+            Short Text for Fixed Values This text appears when fixed values are
+            displayed in the F4 help. It explains the possible input values. See
+            Task-Oriented Instructions Reference Documentation for Semantic
+            Properties of Domains
+      title: VH_ProductTypeCode
+    GWSAMPLE_BASIC.VH_ProductTypeCode-create:
+      type: object
+      title: VH_ProductTypeCode (for create)
+    GWSAMPLE_BASIC.VH_ProductTypeCode-update:
+      type: object
+      title: VH_ProductTypeCode (for update)
+    GWSAMPLE_BASIC.VH_BPRole:
+      type: object
+      properties:
+        BpRole:
+          type: string
+          maxLength: 3
+          title: Bus. Part. Role
+          description: 'EPM: Business Partner Role'
+        Shorttext:
+          type: string
+          maxLength: 60
+          title: Short Descript.
+          description: >-
+            Short Text for Fixed Values This text appears when fixed values are
+            displayed in the F4 help. It explains the possible input values. See
+            Task-Oriented Instructions Reference Documentation for Semantic
+            Properties of Domains
+      title: VH_BPRole
+    GWSAMPLE_BASIC.VH_BPRole-create:
+      type: object
+      title: VH_BPRole (for create)
+    GWSAMPLE_BASIC.VH_BPRole-update:
+      type: object
+      title: VH_BPRole (for update)
+    GWSAMPLE_BASIC.VH_Language:
+      type: object
+      properties:
+        Spras:
+          type: string
+          maxLength: 2
+          title: Language
+          description: >-
+            Language Key The language key indicates - the language in which
+            texts are displayed, - the language in which you enter texts, - the
+            language in which the system prints texts.
+        Sptxt:
+          type: string
+          maxLength: 16
+          title: Name
+          description: Name of Language
+      title: VH_Language
+    GWSAMPLE_BASIC.VH_Language-create:
+      type: object
+      title: VH_Language (for create)
+    GWSAMPLE_BASIC.VH_Language-update:
+      type: object
+      title: VH_Language (for update)
+    GWSAMPLE_BASIC.CT_Address:
+      type: object
+      properties:
+        City:
+          type: string
+          nullable: true
+          maxLength: 40
+          title: City
+          description: 'EPM: City'
+        PostalCode:
+          type: string
+          nullable: true
+          maxLength: 10
+          title: Postal Code
+          description: 'EPM: Postal Code'
+        Street:
+          type: string
+          nullable: true
+          maxLength: 60
+          title: Street
+          description: 'EPM: Street'
+        Building:
+          type: string
+          nullable: true
+          maxLength: 10
+          title: Building
+          description: 'EPM: Building'
+        Country:
+          type: string
+          nullable: true
+          maxLength: 3
+          title: Country
+          description: 'EPM: Country Code'
+        AddressType:
+          type: string
+          nullable: true
+          maxLength: 2
+          title: Address Type
+          description: 'EPM: Address Type'
+      title: CT_Address
+    GWSAMPLE_BASIC.CT_Address-create:
+      type: object
+      properties:
+        City:
+          type: string
+          nullable: true
+          maxLength: 40
+          title: City
+          description: 'EPM: City'
+        PostalCode:
+          type: string
+          nullable: true
+          maxLength: 10
+          title: Postal Code
+          description: 'EPM: Postal Code'
+        Street:
+          type: string
+          nullable: true
+          maxLength: 60
+          title: Street
+          description: 'EPM: Street'
+        Building:
+          type: string
+          nullable: true
+          maxLength: 10
+          title: Building
+          description: 'EPM: Building'
+        Country:
+          type: string
+          nullable: true
+          maxLength: 3
+          title: Country
+          description: 'EPM: Country Code'
+        AddressType:
+          type: string
+          nullable: true
+          maxLength: 2
+          title: Address Type
+          description: 'EPM: Address Type'
+      title: CT_Address (for create)
+    GWSAMPLE_BASIC.CT_Address-update:
+      type: object
+      properties:
+        City:
+          type: string
+          nullable: true
+          maxLength: 40
+          title: City
+          description: 'EPM: City'
+        PostalCode:
+          type: string
+          nullable: true
+          maxLength: 10
+          title: Postal Code
+          description: 'EPM: Postal Code'
+        Street:
+          type: string
+          nullable: true
+          maxLength: 60
+          title: Street
+          description: 'EPM: Street'
+        Building:
+          type: string
+          nullable: true
+          maxLength: 10
+          title: Building
+          description: 'EPM: Building'
+        Country:
+          type: string
+          nullable: true
+          maxLength: 3
+          title: Country
+          description: 'EPM: Country Code'
+        AddressType:
+          type: string
+          nullable: true
+          maxLength: 2
+          title: Address Type
+          description: 'EPM: Address Type'
+      title: CT_Address (for update)
+    GWSAMPLE_BASIC.CT_String:
+      type: object
+      properties:
+        String:
+          type: string
+      title: CT_String
+    GWSAMPLE_BASIC.CT_String-create:
+      type: object
+      title: CT_String (for create)
+    GWSAMPLE_BASIC.CT_String-update:
+      type: object
+      title: CT_String (for update)
+    count:
+      type: string
+      description: >-
+        The number of entities in the collection. Available when using the
+        [$inlinecount](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=67)
+        query option.
+    error:
+      type: object
+      required:
+        - error
+      properties:
+        error:
+          type: object
+          required:
+            - code
+            - message
+          properties:
+            code:
+              type: string
+            message:
+              type: object
+              required:
+                - lang
+                - value
+              properties:
+                lang:
+                  type: string
+                value:
+                  type: string
+            innererror:
+              type: object
+              description: The structure of this object is service-specific
+  parameters:
+    top:
+      name: $top
+      in: query
+      description: >-
+        Show only the first n items, see [Paging -
+        Top](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=66)
+      schema:
+        type: integer
+        minimum: 0
+      example: 50
+    skip:
+      name: $skip
+      in: query
+      description: >-
+        Skip the first n items, see [Paging -
+        Skip](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=65)
+      schema:
+        type: integer
+        minimum: 0
+    count:
+      name: $inlinecount
+      in: query
+      description: >-
+        Include count of items, see
+        [Inlinecount](https://help.sap.com/doc/5890d27be418427993fafa6722cdc03b/Cloud/en-US/OdataV2.pdf#page=67)
+      schema:
+        type: string
+        enum:
+          - allpages
+          - none
+  responses:
+    error:
+      description: Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error'

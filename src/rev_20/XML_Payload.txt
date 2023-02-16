@@ -1,0 +1,16 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <List>
+            <Product>
+                <ProductID>HT-1000</ProductID>
+            </Product>
+            <Product>
+                <ProductID>HT-1020</ProductID>
+            </Product>
+            <Product>
+                <ProductID>HT-1035</ProductID>
+            </Product>
+        </List>
+    </soapenv:Body>
+</soapenv:Envelope>
