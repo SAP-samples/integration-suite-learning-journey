@@ -1,0 +1,12 @@
+Name: SApGatewayDemoSystemES5_Provider
+Connection Tab
+Type: Internet
+Host: sapes5.sapdevcenter.com
+Port: 443
+Use SSL: flagged
+Catalog Service Settings
+Path Prefix: /sap/opu/odata
+Service Collection URL: /IWFND/CATALOGSERVICE/ServiceCollection
+Authentication type: Choose Basic
+Username: enter your ES5 User (P-User)
+Password: enter your ES5 Password 
