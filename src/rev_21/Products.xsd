@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="Products">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="1" maxOccurs="unbounded" name="Product">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element nillable="false" maxOccurs="1" name="ProductId">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string" xmlns="">
+                                        <xs:maxLength value="10"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element type="xs:string" nillable="true" minOccurs="0" maxOccurs="1" name="Name" xmlns=""/>
+							<xs:element nillable="true" minOccurs="0" maxOccurs="1" name="Category">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string" xmlns="">
+                                        <xs:maxLength value="40"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element nillable="true" minOccurs="0" maxOccurs="1" name="DimensionUnit">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string" xmlns="">
+                                        <xs:maxLength value="3"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element type="xs:decimal" nillable="true" minOccurs="0" maxOccurs="1" name="DimensionDepth" xmlns=""/>
+                            <xs:element type="xs:decimal" nillable="true" minOccurs="0" maxOccurs="1" name="DimensionHeight" xmlns=""/>
+                            <xs:element type="xs:decimal" nillable="true" minOccurs="0" maxOccurs="1" name="DimensionWidth" xmlns=""/>
+                            <xs:element type="xs:decimal" nillable="true" minOccurs="0" maxOccurs="1" name="Weight" xmlns=""/>
+                            <xs:element nillable="true" minOccurs="0" maxOccurs="1" name="WeightUnit">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string" xmlns="">
+                                        <xs:maxLength value="3"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
